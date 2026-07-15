@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "note": "Flat, self-contained art styles. Each entry is a complete high-strength art-style prompt that goes into the custom_art_style OVERRIDE slot (highest priority; the panel's built-in style_core is demoted to shot/composition only). No inheritance, no host base to dilute the look. Styles are described purely by technique (materials, line, light, color, texture, AND character-design grammar — face geometry, proportions and rendering approach, so the style governs how characters are drawn, not just the surface) with NO brand/IP names, so the look survives platform trademark scans at full stylistic strength — the technique words, not any studio name, are what actually drive the render. balloon_placement decides in-art balloons vs external captions per look (painterly/watercolor read as stickers under in-art balloons).",
+  "styles": {
+    "deco-chiaroscuro": {
+      "display_name": "装饰华光明暗",
+      "balloon_placement": "caption",
+      "prompt": "Belle-Epoque painterly fantasy comic art — a luminous 'living oil painting', richly colored and dreamlike, deliberately NOT drab or muddy. FIVE signatures, all required. (1) LUMINOUS JEWEL PALETTE: deep atmospheric darks lit by GLOWING jewel-tone color — teal and turquoise, rose and magenta, luminous antique gold, cool sapphire — colors glow as if backlit; rich saturation lives inside the light. Gilded Art-Nouveau and Art-Deco ornament catches real metallic light. (2) CHIAROSCURO WITH GLOW: one strong directional key light and deep shadow, but shadows stay colorful and transparent — never dead flat black; figures carved out by a bright luminous rim light and volumetric glowing haze. (3) LIVING-PAINTING texture: rich impasto and visible oil brushwork, hand-worked surfaces, never smooth digital gradient or flat vector. (4) ELEGANT SEMI-REALISM: refined, gracefully proportioned semi-realistic figures with sculpted painterly features and belle-epoque poise — beautiful and expressive (not cartoon, not photographic). (5) MONUMENTAL BEAUTY: a figure against vast layered depth and elegant negative space — gorgeous and haunted, yet always LUMINOUS and beautiful, never grim grey murk. Keep clear comic panel readability and one dominant luminous focal figure.",
+      "avoid": "muddy grey wash, drab desaturated brown murk, dead flat black shadows, subject swallowed by darkness, gloomy lightless mood, flat even lighting, smooth digital gradient, plastic 3D render, cheap flat yellow gold, cartoon or anime stylization, photographic realism"
+    },
+    "storybook-watercolor": {
+      "display_name": "自然水彩绘本",
+      "balloon_placement": "caption",
+      "prompt": "Warm hand-painted watercolor storybook art in the spirit of classic feature-length hand-drawn animation — a soft illustrated STORYBOOK look, deliberately NOT photographic realism. MEDIUM: transparent layered watercolor washes with visible paper grain and soft bleeding edges, luminous natural daylight, gentle atmospheric perspective; soft cel-style shading in a few flat value steps; richly painted detailed backgrounds behind cleaner simplified characters. CHARACTER DESIGN (this governs the faces and overrides any realistic character description): gently rounded faces with soft simplified features, small clean nose and mouth, moderately large soft eyes with simple highlights (natural and gentle, not huge sparkling shoujo eyes), smooth skin with no realistic pores or wrinkles, hair as soft simplified masses with a few flowing strands; lightly stylized natural proportions about 6-7 heads tall (never chibi); warm, tender, readable expressions. PALETTE & MOOD: bright, airy, luminous and alive; fresh sage-green, warm ochre, soft sky-blue and clean sunlit skin; translucent and gently saturated, never muddy, never gloomy. Keep clear comic panel readability and one clear focal subject.",
+      "avoid": "photographic realism, realistic skin pores and wrinkles, dark gloomy grim tones, heavy dead black shadows, oversaturated neon anime colors, glossy 3D render, plastic skin, over-cute chibi faces, huge sparkling shoujo eyes, muddy opaque paint, desaturated somber mood"
+    },
+    "print-hybrid-kinetic": {
+      "display_name": "错版印刷动能",
+      "balloon_placement": "in_art",
+      "prompt": "Hybrid comic-book art with loud multiverse graphic-print energy. Bold flat graphic shapes, visible halftone Ben-Day dot shading, deliberate offset-print color misregistration (thin cyan/magenta edge shift) kept OFF the faces, thick confident outer contours with sparse interior lines. High-energy dynamic exaggerated perspective, expressive motion lines, punchy saturated accent colors peaking on the main subject against calmer backgrounds. Printed-poster texture, kinetic, loud, modern. Keep clear comic panel readability.",
+      "avoid": "plastic 3D render, flat lifeless cel shading, muddy colors, random full-frame chromatic aberration, misregistration over faces, noisy unreadable background"
+    },
+    "painterly-epic-cinema": {
+      "display_name": "厚涂史诗电影",
+      "balloon_placement": "caption",
+      "prompt": "Painterly cinematic comic art with a hand-painted animation-feature finish. Rich THICK painted brushwork and impasto volume, semi-realistic characters with sculpted facial planes and hand-modelled features, dramatic rim light and volumetric moody color grading. Restrained overall saturation with one or two high-purity accent colors glowing against desaturated surroundings. Epic, weighty, film-still atmosphere; acting and lighting lead over effects. Keep clear comic panel readability and one clear focal figure.",
+      "avoid": "flat vector shading, plastic doll skin, glossy 3D game render, fantasy effect overload, generic concept-art blur, weightless flat lighting"
+    },
+    "gongbi-ink": {
+      "display_name": "工笔水墨",
+      "balloon_placement": "caption",
+      "prompt": "Traditional Chinese gongbi-and-ink painting art. Fine controlled brush-line contours (baimiao), delicate mineral-pigment washes, generous negative-space (liubai) composition, xuan-paper texture, calm elegant restraint. Ink-black accents with muted celadon, cinnabar and ochre. Poetic, spacious, classical. Keep clear comic panel readability and a clear focal subject.",
+      "avoid": "western oil rendering, heavy 3D shading, oversaturated colors, cluttered composition, photographic realism, neon"
+    },
+    "modern-shonen-manga": {
+      "display_name": "新世代少年漫",
+      "balloon_placement": "in_art",
+      "prompt": "Modern shonen manga art. Clean expressive variable-weight ink line, high-contrast screentone shading, dynamic action perspective, strong readable silhouettes, expressive readable faces, speed lines and impact framing on key beats. Energetic, kinetic, high-clarity black-and-white-first look with restrained spot color. Keep clear comic panel readability.",
+      "avoid": "muddy crosshatching, over-rendered realistic skin, weak flat silhouette, stiff pose, photographic realism, dull static framing"
+    }
+  }
+}

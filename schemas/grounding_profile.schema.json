@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Grounding Profile 1.0",
+  "description": "Adaptation-constraint scores for one book: what this world is bound by, and therefore what must be researched before drawing it. Written by the host at plan time; see references/grounding/GROUNDING-MATRIX.md.",
+  "type": "object",
+  "required": ["schema_version", "book_title", "scores", "copyright_status", "real_person_or_private_source"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "book_title": {"type": "string"},
+    "scores": {
+      "type": "object",
+      "required": ["historical", "textual", "conceptual", "experiential", "procedural", "rights", "cultural"],
+      "properties": {
+        "historical": {"type": "integer", "minimum": 0, "maximum": 5},
+        "textual": {"type": "integer", "minimum": 0, "maximum": 5},
+        "conceptual": {"type": "integer", "minimum": 0, "maximum": 5},
+        "experiential": {"type": "integer", "minimum": 0, "maximum": 5},
+        "procedural": {"type": "integer", "minimum": 0, "maximum": 5},
+        "rights": {"type": "integer", "minimum": 0, "maximum": 5},
+        "cultural": {"type": "integer", "minimum": 0, "maximum": 5}
+      }
+    },
+    "rationales": {
+      "type": "object",
+      "description": "One evidence sentence per dimension scoring >= 3 (what in the book demands this).",
+      "additionalProperties": {"type": "string"}
+    },
+    "copyright_status": {
+      "enum": ["public_domain", "in_copyright", "licensed"],
+      "description": "public_domain: free to adapt (source_edition required — a modern translation of a PD original is NOT automatically PD). in_copyright without license: personal-use only; compose-project refuses the public bundle. licensed: the license object below is required."
+    },
+    "source_edition": {
+      "type": "string",
+      "description": "Required for public_domain: the exact edition/translation adapted (e.g. 人民文学出版社 1982 版《西游记》). The original being PD does not clear a modern translation or annotated edition."
+    },
+    "license": {
+      "type": "object",
+      "description": "Required for copyright_status=licensed. Self-reported declaration, not a verified grant — it must be concrete enough for a human to stand behind.",
+      "required": ["rights_holder", "licensed_work", "proof_note"],
+      "properties": {
+        "rights_holder": {"type": "string", "description": "Who granted the adaptation right."},
+        "licensed_work": {"type": "string", "description": "Which work/edition the grant covers."},
+        "proof_note": {"type": "string", "description": "Where the proof lives (contract file, email thread, page URL)."},
+        "scope": {"type": "string", "description": "Optional: territory/media/exclusivity limits."},
+        "valid_until": {"type": "string", "description": "Optional: expiry date if the grant is time-limited."}
+      }
+    },
+    "real_person_or_private_source": {
+      "type": "boolean",
+      "description": "True when the source depicts identifiable real people or was privately provided (memoir, letters, user upload). Public export then requires consent_note."
+    },
+    "consent_note": {
+      "type": "string",
+      "description": "Who consented, to what, when — required for public export when real_person_or_private_source is true."
+    },
+    "professional_review_note": {
+      "type": "string",
+      "description": "Required for public export when procedural >= 4 (medical/legal/dosage/dangerous procedure): who with what qualification reviewed the facts, and when. Self-reported — this module records declarations and enforces their consistency; it is NOT a legal or professional review itself."
+    },
+    "era_delta": {
+      "type": "string",
+      "description": "When multiple eras share a panel: explicit statement of the visual differences, or an explicit statement that the source says there are none (桃花源记 悉如外人)."
+    },
+    "contradiction_register": {
+      "type": "array",
+      "description": "Contradictions inside the source text. Register them; never fix them.",
+      "items": {"type": "string"}
+    }
+  }
+}

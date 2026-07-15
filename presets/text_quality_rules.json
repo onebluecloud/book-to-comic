@@ -1,0 +1,21 @@
+{
+  "schema_version": "3.0",
+  "forbidden_generic_phrases": [
+    "你是否也",
+    "人生就是",
+    "选择与代价",
+    "知道很多却过不好这一生",
+    "这才是真相"
+  ],
+  "truncation_markers": [
+    "...",
+    "…"
+  ],
+  "card_form": {
+    "max_paragraphs": 3,
+    "must_be_written_separately_from_long_form": true
+  },
+  "long_form": {
+    "min_average_chars": 40
+  }
+}

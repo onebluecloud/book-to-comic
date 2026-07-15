@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/book-to-comic/art-bible.schema.json",
+  "title": "Book-to-Comic Art Direction Bible",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "style_id",
+    "variant_id",
+    "style_lock",
+    "characters",
+    "environments",
+    "props",
+    "color_script",
+    "shot_plan",
+    "lettering",
+    "qa_gates"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "style_id": {
+      "enum": [
+        "manga",
+        "webtoon-manhwa",
+        "manhua",
+        "franco-belgian-bd",
+        "editorial",
+        "comic-strip",
+        "doodle",
+        "retro-halftone",
+        "ink-sketch"
+      ]
+    },
+    "variant_id": {
+      "type": "string"
+    },
+    "style_lock": {
+      "type": "object"
+    },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "environments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "color_script": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "shot_plan": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "lettering": {
+      "type": "object"
+    },
+    "qa_gates": {
+      "type": "object"
+    }
+  }
+}

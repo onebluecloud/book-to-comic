@@ -1,0 +1,128 @@
+{
+  "schema_version": "2.0.0",
+  "style_id": "ink-sketch",
+  "variant_id": "literary-pen",
+  "style_lock": {
+    "line": "confident nib line, directional hatching, selective solid black",
+    "value": "paper white / line midtones / controlled blacks",
+    "color": "warm black on ivory with one muted rust accent",
+    "camera": "35mm establishing, 50mm dialogue, 85mm emotional close-up",
+    "forbidden": [
+      "unfinished pencil rough",
+      "uniform gray smudge",
+      "embedded text"
+    ]
+  },
+  "characters": [
+    {
+      "character_id": "c01",
+      "name": "示例角色",
+      "silhouette": "narrow vertical coat, forward-leaning posture",
+      "face_geometry": "long face, deep-set eyes, asymmetrical brows",
+      "costume_layers": [
+        "shirt",
+        "waistcoat",
+        "long coat"
+      ],
+      "materials": [
+        "linen",
+        "wool",
+        "worn leather"
+      ],
+      "expressions": [
+        "restrained doubt",
+        "contained anger",
+        "exhausted resolve"
+      ],
+      "immutable": [
+        "hairline",
+        "nose bridge",
+        "coat length"
+      ]
+    }
+  ],
+  "environments": [
+    {
+      "environment_id": "e01",
+      "name": "书房",
+      "layout_anchors": [
+        "window left of desk",
+        "door behind right wall",
+        "bookcase opposite window"
+      ],
+      "materials": [
+        "dark wood",
+        "plaster",
+        "paper"
+      ],
+      "light_sources": [
+        "window",
+        "desk lamp"
+      ],
+      "detail_rule": "detailed establishing panel, simplified emotional close-up"
+    }
+  ],
+  "props": [
+    {
+      "prop_id": "p01",
+      "name": "契约书",
+      "owner": "c01",
+      "story_function": "decision trigger",
+      "silhouette": "small leather folio with brass corners",
+      "materials": [
+        "calf leather",
+        "brass",
+        "rag paper"
+      ],
+      "states": [
+        "sealed",
+        "opened",
+        "damaged"
+      ]
+    }
+  ],
+  "color_script": [
+    {
+      "beat": "normal",
+      "temperature": "cool",
+      "saturation": "very low",
+      "accent": "none"
+    },
+    {
+      "beat": "temptation",
+      "temperature": "warm intrusion",
+      "saturation": "low",
+      "accent": "muted rust"
+    }
+  ],
+  "shot_plan": [
+    {
+      "panel": 1,
+      "shot_size": "wide establishing",
+      "angle": "eye level",
+      "focal_point": "character isolated at desk"
+    },
+    {
+      "panel": 2,
+      "shot_size": "insert close-up",
+      "angle": "top-down",
+      "focal_point": "sealed contract"
+    }
+  ],
+  "lettering": {
+    "dialogue": "thin oval balloons",
+    "narration": "open ivory captions",
+    "sfx": "hand-lettered only when essential",
+    "safe_zones": "top-left or exterior margin"
+  },
+  "qa_gates": {
+    "hard_fail": [
+      "identity drift",
+      "style drift",
+      "extra limbs",
+      "embedded text",
+      "missing prop state"
+    ],
+    "retry_limit": 2
+  }
+}

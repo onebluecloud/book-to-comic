@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Character Bible 3.0",
+  "type": "object",
+  "required": ["schema_version", "planning_status", "characters", "relationship_map"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "planning_status": { "type": "string" },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "narrative_role",
+          "dramatic_function",
+          "unremovable_reason",
+          "appeal_strategy",
+          "shape_language",
+          "face_geometry",
+          "body_design",
+          "wardrobe_design",
+          "performance_design",
+          "inner_engine"
+        ]
+      }
+    },
+    "relationship_map": { "type": "array" }
+  }
+}

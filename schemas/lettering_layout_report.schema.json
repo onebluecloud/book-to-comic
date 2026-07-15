@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Lettering Layout Report",
+  "type": "object",
+  "required": ["schema_version", "status", "panels", "issues"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "status": { "enum": ["passed", "warning", "failed"] },
+    "panels": { "type": "array" },
+    "issues": { "type": "array" },
+    "mobile_scan_pass": { "type": "boolean" }
+  }
+}

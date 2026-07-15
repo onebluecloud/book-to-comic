@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0.0",
+  "policy": "Prefer market-popular substyles when content signals match. Do not force popular styles when book content clearly fits a more specific style.",
+  "preferred_variants": [
+    {
+      "style_id": "webtoon-manhwa",
+      "variant_id": "romance-polished",
+      "tier": "S",
+      "boost": 18,
+      "match_any": ["romance", "relationship", "dating", "young adult", "love"],
+      "avoid_any": ["philosophy", "social-science", "politics", "policy", "war"],
+      "min_axes": {"emotion": 3, "mobile": 4},
+      "market_note": "Romance is the strongest current webtoon demand signal."
+    },
+    {
+      "style_id": "webtoon-manhwa",
+      "variant_id": "romance-fantasy",
+      "tier": "S",
+      "boost": 20,
+      "match_any": ["romance fantasy", "romantasy", "fantasy romance", "fantasy", "royal", "duke", "princess"],
+      "avoid_any": ["philosophy", "social-science", "business"],
+      "min_axes": {"emotion": 3, "mobile": 4},
+      "market_note": "Romantasy combines the largest romance demand with fast-growing fantasy demand."
+    },
+    {
+      "style_id": "webtoon-manhwa",
+      "variant_id": "action-cinematic",
+      "tier": "S",
+      "boost": 14,
+      "match_any": ["action", "adventure", "leveling", "survival", "hunter", "superpower"],
+      "avoid_any": ["philosophy", "business", "memoir"],
+      "min_axes": {"action": 4, "plot": 4, "mobile": 4},
+      "market_note": "Action fantasy remains a high-demand mobile-comic lane."
+    },
+    {
+      "style_id": "manga",
+      "variant_id": "shonen-kinetic",
+      "tier": "S",
+      "boost": 12,
+      "match_any": ["action", "adventure", "battle", "competition", "training", "sports"],
+      "avoid_any": ["business", "philosophy", "self-help"],
+      "min_axes": {"action": 4, "emotion": 4},
+      "market_note": "Shonen is the largest manga demand lane."
+    },
+    {
+      "style_id": "webtoon-manhwa",
+      "variant_id": "urban-drama",
+      "tier": "A",
+      "boost": 10,
+      "match_any": ["urban", "office", "campus", "family", "drama", "modern"],
+      "avoid_any": ["ancient", "wuxia", "xianxia"],
+      "min_axes": {"plot": 3, "mobile": 4},
+      "market_note": "Urban drama is a broad mobile-retention lane."
+    },
+    {
+      "style_id": "manhua",
+      "variant_id": "wuxia-action",
+      "tier": "A",
+      "boost": 14,
+      "match_any": ["wuxia", "jianghu", "martial", "sword", "ancient china", "china"],
+      "avoid_any": ["office", "campus", "business"],
+      "min_axes": {"action": 4, "historical_world": 4},
+      "market_note": "Wuxia remains a strong Chinese-language action/fantasy signal when the content actually matches."
+    },
+    {
+      "style_id": "manhua",
+      "variant_id": "xianxia-fantasy",
+      "tier": "A",
+      "boost": 14,
+      "match_any": ["xianxia", "cultivation", "immortal", "sect", "spirit power"],
+      "avoid_any": ["office", "business", "realism"],
+      "min_axes": {"historical_world": 4},
+      "market_note": "Xianxia/cultivation is strong for Chinese fantasy, but should not be forced onto realistic books."
+    },
+    {
+      "style_id": "webtoon-manhwa",
+      "variant_id": "thriller-horror-scroll",
+      "tier": "A",
+      "boost": 10,
+      "match_any": ["thriller", "horror", "mystery", "crime", "suspense"],
+      "avoid_any": ["healing", "self-help", "children"],
+      "min_axes": {"plot": 3, "mobile": 4},
+      "market_note": "Thriller and horror are smaller than romance but have strong scroll-native retention."
+    },
+    {
+      "style_id": "webtoon-manhwa",
+      "variant_id": "slice-of-life-soft-color",
+      "tier": "A",
+      "boost": 8,
+      "match_any": ["healing", "slice of life", "family", "friendship", "cozy", "daily life"],
+      "avoid_any": ["war", "noir", "crime"],
+      "min_axes": {"warmth": 4, "mobile": 4},
+      "market_note": "Soft slice-of-life is useful for light mobile reading."
+    },
+    {
+      "style_id": "doodle",
+      "variant_id": "sketchnote-visual-notes",
+      "tier": "A",
+      "boost": 12,
+      "match_any": ["book notes", "study", "learning", "course", "knowledge", "self-help"],
+      "avoid_any": ["battle", "romance fantasy", "horror"],
+      "min_axes": {"text_density": 4, "abstract_ideas": 3},
+      "market_note": "For book-to-comic and social sharing, sketchnote is more useful than many niche art styles."
+    },
+    {
+      "style_id": "editorial",
+      "variant_id": "infographic-explainer",
+      "tier": "A",
+      "boost": 10,
+      "match_any": ["business", "framework", "method", "economics", "management"],
+      "avoid_any": ["romance", "battle", "horror"],
+      "min_axes": {"text_density": 4, "abstract_ideas": 3},
+      "market_note": "Explainer comics are high-fit for nonfiction conversion."
+    },
+    {
+      "style_id": "editorial",
+      "variant_id": "symbolic-minimal",
+      "tier": "A",
+      "boost": 10,
+      "match_any": ["philosophy", "social-science", "politics", "policy", "theory"],
+      "avoid_any": ["romance", "battle", "xianxia"],
+      "min_axes": {"text_density": 4, "abstract_ideas": 4},
+      "market_note": "For serious nonfiction, symbolic minimalism is more fitting than mass romance/fantasy."
+    },
+    {
+      "style_id": "ink-sketch",
+      "variant_id": "literary-pen",
+      "tier": "B",
+      "boost": 5,
+      "match_any": ["literary", "memoir", "history", "classic"],
+      "avoid_any": ["romance fantasy", "campus", "office"],
+      "min_axes": {"premium_editorial": 4},
+      "market_note": "A quality lane for literary work, but less mass-market than romance/action webtoons."
+    }
+  ]
+}

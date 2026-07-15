@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://book-to-comic.local/schemas/page_plan.schema.json",
+  "title": "Book to Comic Page Plan",
+  "type": "object",
+  "required": ["schema_version", "planning_status", "pages"],
+  "properties": {
+    "schema_version": { "const": "3.0" },
+    "planning_status": { "type": "string", "enum": ["ready", "needs_host_planning"] },
+    "pages": { "type": "array" }
+  }
+}

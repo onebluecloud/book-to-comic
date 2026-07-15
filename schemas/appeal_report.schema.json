@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Appeal Report",
+  "type": "object",
+  "required": ["schema_version", "passed", "checks"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "passed": { "type": "boolean" },
+    "checks": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["name", "status", "evidence"],
+        "properties": {
+          "name": { "type": "string" },
+          "status": { "enum": ["passed", "warn", "fail"] },
+          "evidence": {}
+        }
+      }
+    },
+    "issues": { "type": "array" }
+  }
+}

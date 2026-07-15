@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Project",
+  "type": "object",
+  "required": ["schema_version", "project_id", "book_title", "delivery_intent"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "project_id": { "type": "string" },
+    "project_title": { "type": "string" },
+    "book_title": { "type": "string" },
+    "delivery_intent": { "enum": ["mass_traffic", "hardcore_showcase"] }
+  }
+}

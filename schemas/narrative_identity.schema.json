@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Narrative Identity",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "planning_status",
+    "book_title",
+    "language",
+    "voice_core",
+    "speaker_registers",
+    "forbidden_generic_phrases",
+    "forbidden_cross_book_phrases",
+    "panel_text_policy"
+  ],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "planning_status": { "type": "string" },
+    "book_title": { "type": "string" },
+    "language": { "type": "string" },
+    "voice_core": { "type": "object" },
+    "speaker_registers": { "type": "array" },
+    "forbidden_generic_phrases": { "type": "array" },
+    "forbidden_cross_book_phrases": { "type": "array" },
+    "panel_text_policy": { "type": "object" }
+  }
+}

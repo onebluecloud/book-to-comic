@@ -1,0 +1,64 @@
+{
+  "status": "research-only; do not add top-level menu entries without explicit product decision",
+  "modifiers": {
+    "american-golden-pulp": {
+      "compatible_with": [
+        "retro-halftone"
+      ],
+      "changes": [
+        "更强封面构图",
+        "厚重墨线",
+        "有限原色",
+        "纸张和套色质感"
+      ]
+    },
+    "american-silver-kinetic": {
+      "compatible_with": [
+        "retro-halftone"
+      ],
+      "changes": [
+        "英雄式动态透视",
+        "速度线",
+        "更明亮颜色",
+        "大动作轮廓"
+      ]
+    },
+    "american-noir-crime": {
+      "compatible_with": [
+        "ink-sketch",
+        "retro-halftone"
+      ],
+      "changes": [
+        "spotted blacks",
+        "百叶窗硬光",
+        "极少强调色",
+        "城市犯罪构图"
+      ]
+    },
+    "american-indie-literary": {
+      "compatible_with": [
+        "editorial",
+        "ink-sketch"
+      ],
+      "changes": [
+        "个性线条",
+        "生活化人物",
+        "低调色彩",
+        "作者性叙事"
+      ]
+    },
+    "american-modern-cinematic": {
+      "compatible_with": [
+        "retro-halftone",
+        "ink-sketch"
+      ],
+      "changes": [
+        "电影镜头",
+        "写实解剖",
+        "变量刷墨",
+        "受控数字上色"
+      ],
+      "warning": "该方向已经超出 retro-halftone 或 ink-sketch 的默认含义，若成为常用需求，后续应独立成第十个顶层风格，而不是长期藏在 modifier 中。"
+    }
+  }
+}

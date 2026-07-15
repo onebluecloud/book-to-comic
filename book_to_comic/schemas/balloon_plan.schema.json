@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Balloon Plan 1.0",
+  "description": "Host-authored in-art balloon and SFX layout. Coordinates are normalized 0-1 relative to the panel art. The host must LOOK at each approved panel image before writing this file.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "episode_id",
+    "panels"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "episode_id": {
+      "type": "string"
+    },
+    "panels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "panel_id",
+          "panel_index",
+          "balloons"
+        ],
+        "properties": {
+          "panel_id": {
+            "type": "string"
+          },
+          "panel_index": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "balloons": {
+            "type": "array",
+            "maxItems": 4,
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "text",
+                "anchor",
+                "box"
+              ],
+              "properties": {
+                "balloon_id": {
+                  "type": "string"
+                },
+                "type": {
+                  "enum": [
+                    "speech",
+                    "thought",
+                    "shout",
+                    "whisper",
+                    "narration_box"
+                  ]
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 60
+                },
+                "speaker": {
+                  "type": "string"
+                },
+                "anchor": {
+                  "type": "object",
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "y": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "description": "Speaker mouth position for tail direction (thought: head position)."
+                },
+                "box": {
+                  "type": "object",
+                  "required": [
+                    "x",
+                    "y",
+                    "w",
+                    "h"
+                  ],
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "y": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "w": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "maximum": 1
+                    },
+                    "h": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "description": "Empty area in the art where the balloon may sit. Must NOT cover faces, hands, or key props."
+                },
+                "tail": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "reading_order": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "sfx": {
+            "type": "array",
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "text",
+                "anchor"
+              ],
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 6
+                },
+                "anchor": {
+                  "type": "object",
+                  "required": [
+                    "x",
+                    "y"
+                  ],
+                  "properties": {
+                    "x": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "y": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  }
+                },
+                "angle": {
+                  "type": "number",
+                  "minimum": -45,
+                  "maximum": 45
+                },
+                "scale": {
+                  "type": "number",
+                  "minimum": 0.4,
+                  "maximum": 2
+                },
+                "style": {
+                  "enum": [
+                    "impact",
+                    "soft"
+                  ]
+                }
+              }
+            }
+          },
+          "no_go_boxes": {
+            "type": "array",
+            "description": "Regions the host marked untouchable while LOOKING at the panel: every visible face (label containing face/脸/头 = zero overlap tolerance), hands, and the action subject. Balloons overlapping these fail validation. Declaring this opts the panel into strict placement checks.",
+            "items": {
+              "type": "object",
+              "required": [
+                "x",
+                "y",
+                "w",
+                "h"
+              ],
+              "properties": {
+                "x": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "y": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "w": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1
+                },
+                "h": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 1
+                },
+                "label": {
+                  "type": "string",
+                  "description": "What lives here, e.g. 老人脸 / 牛脸 / 右手 / 主体动作"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "writing_mode": {
+      "enum": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal",
+      "description": "Reading mode for precedence checks: horizontal = top-to-bottom then left-to-right; vertical = right-to-left then top-to-bottom."
+    }
+  }
+}

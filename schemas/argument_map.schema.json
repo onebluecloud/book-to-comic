@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://book-to-comic.local/schemas/argument_map.schema.json",
+  "title": "Book to Comic Argument Map",
+  "type": "object",
+  "required": ["schema_version", "planning_status", "core_arguments"],
+  "properties": {
+    "schema_version": { "const": "3.0" },
+    "planning_status": { "type": "string", "enum": ["ready", "needs_host_planning"] },
+    "core_arguments": { "type": "array" },
+    "bridges": { "type": "array" }
+  }
+}

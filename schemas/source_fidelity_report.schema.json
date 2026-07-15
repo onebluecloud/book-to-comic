@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://book-to-comic.local/schemas/source_fidelity_report.schema.json",
+  "title": "Book to Comic Source Fidelity Report",
+  "type": "object",
+  "required": ["schema_version", "passed", "metrics", "issues"],
+  "properties": {
+    "schema_version": { "const": "3.0" },
+    "passed": { "type": "boolean" },
+    "metrics": { "type": "object" },
+    "issues": { "type": "array" }
+  }
+}

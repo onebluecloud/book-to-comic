@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/book-to-comic/visual-contract.schema.json",
+  "title": "Book-to-Comic Visual Contract",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "episode_id",
+    "book_title",
+    "style_id",
+    "character_state",
+    "environment_state",
+    "prop_state",
+    "reference_pack"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "episode_id": {
+      "type": "string"
+    },
+    "book_title": {
+      "type": "string"
+    },
+    "style_id": {
+      "type": "string"
+    },
+    "character_state": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "identity_anchor", "panel_ids", "wardrobe_by_panel"]
+      }
+    },
+    "environment_state": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "kind", "anchors", "panel_ids"]
+      }
+    },
+    "prop_state": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["id", "panel_ids", "states_by_panel"]
+      }
+    },
+    "reference_pack": {
+      "type": "object",
+      "required": ["characters", "environments", "props", "panel_locks"],
+      "properties": {
+        "characters": {
+          "type": "object"
+        },
+        "environments": {
+          "type": "object"
+        },
+        "props": {
+          "type": "object"
+        },
+        "panel_locks": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

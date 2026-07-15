@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://book-to-comic.local/schemas/world_model.schema.json",
+  "title": "Book to Comic World Model",
+  "type": "object",
+  "required": ["schema_version", "planning_status", "era", "geography", "institutions", "material_culture", "access_rules", "environments"],
+  "properties": {
+    "schema_version": { "const": "3.0" },
+    "planning_status": { "type": "string", "enum": ["ready", "needs_host_planning"] },
+    "era": { "type": "string" },
+    "geography": { "type": "string" },
+    "institutions": { "type": "array" },
+    "material_culture": { "type": "array" },
+    "access_rules": { "type": "array" },
+    "environments": { "type": "array" }
+  }
+}

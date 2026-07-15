@@ -1,0 +1,124 @@
+{
+  "axes": [
+    "emotion",
+    "plot",
+    "abstract_ideas",
+    "humor",
+    "mobile",
+    "historical_world",
+    "text_density",
+    "premium_editorial",
+    "action",
+    "warmth"
+  ],
+  "scores": {
+    "manga": {
+      "emotion": 5,
+      "plot": 5,
+      "abstract_ideas": 3,
+      "humor": 3,
+      "mobile": 3,
+      "historical_world": 3,
+      "text_density": 2,
+      "premium_editorial": 3,
+      "action": 5,
+      "warmth": 2
+    },
+    "webtoon-manhwa": {
+      "emotion": 4,
+      "plot": 5,
+      "abstract_ideas": 2,
+      "humor": 3,
+      "mobile": 5,
+      "historical_world": 3,
+      "text_density": 3,
+      "premium_editorial": 3,
+      "action": 4,
+      "warmth": 4
+    },
+    "manhua": {
+      "emotion": 4,
+      "plot": 4,
+      "abstract_ideas": 3,
+      "humor": 3,
+      "mobile": 5,
+      "historical_world": 5,
+      "text_density": 3,
+      "premium_editorial": 4,
+      "action": 4,
+      "warmth": 4
+    },
+    "franco-belgian-bd": {
+      "emotion": 3,
+      "plot": 4,
+      "abstract_ideas": 5,
+      "humor": 3,
+      "mobile": 3,
+      "historical_world": 5,
+      "text_density": 4,
+      "premium_editorial": 5,
+      "action": 2,
+      "warmth": 4
+    },
+    "editorial": {
+      "emotion": 2,
+      "plot": 2,
+      "abstract_ideas": 5,
+      "humor": 5,
+      "mobile": 3,
+      "historical_world": 2,
+      "text_density": 5,
+      "premium_editorial": 5,
+      "action": 1,
+      "warmth": 3
+    },
+    "comic-strip": {
+      "emotion": 3,
+      "plot": 3,
+      "abstract_ideas": 3,
+      "humor": 5,
+      "mobile": 4,
+      "historical_world": 2,
+      "text_density": 4,
+      "premium_editorial": 3,
+      "action": 2,
+      "warmth": 5
+    },
+    "doodle": {
+      "emotion": 3,
+      "plot": 2,
+      "abstract_ideas": 4,
+      "humor": 4,
+      "mobile": 5,
+      "historical_world": 2,
+      "text_density": 4,
+      "premium_editorial": 3,
+      "action": 1,
+      "warmth": 5
+    },
+    "retro-halftone": {
+      "emotion": 5,
+      "plot": 3,
+      "abstract_ideas": 3,
+      "humor": 4,
+      "mobile": 4,
+      "historical_world": 3,
+      "text_density": 2,
+      "premium_editorial": 4,
+      "action": 5,
+      "warmth": 2
+    },
+    "ink-sketch": {
+      "emotion": 4,
+      "plot": 4,
+      "abstract_ideas": 5,
+      "humor": 2,
+      "mobile": 3,
+      "historical_world": 5,
+      "text_density": 4,
+      "premium_editorial": 5,
+      "action": 2,
+      "warmth": 2
+    }
+  }
+}

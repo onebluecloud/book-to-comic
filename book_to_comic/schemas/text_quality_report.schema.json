@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Text Quality Report",
+  "type": "object",
+  "required": ["schema_version", "status", "metrics", "issues"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "status": { "enum": ["passed", "warning", "failed"] },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "issues": { "type": "array" },
+    "panels": { "type": "array" }
+  }
+}

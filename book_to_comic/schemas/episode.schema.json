@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Episode 3.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "planning_status",
+    "episode_id",
+    "book_title",
+    "episode_title",
+    "primary_thesis",
+    "source_refs",
+    "style_id",
+    "episode_format",
+    "adaptation_strategy",
+    "narrative_spine",
+    "concept_units",
+    "rhythm_plan",
+    "story_ir",
+    "scenes"
+  ],
+  "properties": {
+    "schema_version": { "const": "3.0" },
+    "planning_status": { "type": "string" },
+    "episode_id": { "type": "string" },
+    "book_title": { "type": "string" },
+    "episode_title": { "type": "string" },
+    "primary_thesis": { "type": "string" },
+    "source_refs": { "type": "array", "items": { "type": "string" } },
+    "style_id": { "type": "string" },
+    "episode_format": { "enum": ["short_hook", "standard", "deep_scene"] },
+    "adaptation_strategy": { "type": "object" },
+    "narrative_spine": { "type": "object" },
+    "concept_units": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["concept_id", "label", "claim", "mechanism", "evidence", "boundary_conditions", "counterexample", "implication", "source_refs", "factuality"],
+        "properties": {
+          "concept_id": { "type": "string" },
+          "label": { "type": "string" },
+          "claim": { "type": "string" },
+          "mechanism": { "type": "string" },
+          "evidence": { "type": "string" },
+          "boundary_conditions": { "type": "string" },
+          "counterexample": { "type": "string" },
+          "implication": { "type": "string" },
+          "source_refs": { "type": "array", "items": { "type": "string" } },
+          "factuality": { "enum": ["source_fact", "source_interpretation", "adaptation_bridge"] }
+        }
+      }
+    },
+    "rhythm_plan": { "type": "object" },
+    "story_ir": { "type": "object" },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "scene_id",
+          "location",
+          "kind",
+          "story_function",
+          "cause_from_previous",
+          "character_goal",
+          "obstacle",
+          "attempt",
+          "turn",
+          "decision",
+          "consequence",
+          "stakes_before",
+          "stakes_after",
+          "new_information",
+          "irreversible_change",
+          "unremovable_reason",
+          "concept_carried",
+          "source_refs",
+          "emotion_arc",
+          "panels"
+        ],
+        "properties": {
+          "scene_id": { "type": "string" },
+          "location": { "type": "string" },
+          "kind": { "type": "string" },
+          "story_function": { "type": "string" },
+          "cause_from_previous": { "type": "string" },
+          "character_goal": { "type": "string" },
+          "obstacle": { "type": "string" },
+          "attempt": { "type": "string" },
+          "turn": { "type": "string" },
+          "decision": { "type": "string" },
+          "consequence": { "type": "string" },
+          "stakes_before": { "type": "string" },
+          "stakes_after": { "type": "string" },
+          "new_information": { "type": "string" },
+          "irreversible_change": { "type": "string" },
+          "unremovable_reason": { "type": "string" },
+          "concept_carried": { "type": "array", "items": { "type": "string" } },
+          "source_refs": { "type": "array", "items": { "type": "string" } },
+          "emotion_arc": { "type": "object" },
+          "grounding": { "$ref": "#/$defs/grounding" },
+          "panels": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "panel_id",
+                "source_refs",
+                "panel_role",
+                "action_verb",
+                "beat_duration",
+                "visual_density",
+                "text_density",
+                "visual_weight",
+                "pause_after",
+                "reveal_priority",
+                "layout_hint"
+              ],
+              "properties": {
+                "panel_id": { "type": "string" },
+                "source_refs": { "type": "array", "items": { "type": "string" } },
+                "panel_role": { "type": "string" },
+                "action_verb": { "type": "string" },
+                "grounding": { "$ref": "#/$defs/grounding" },
+                "semantic_anchors": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["concept_id", "field"],
+                    "properties": {
+                      "concept_id": { "type": "string" },
+                      "field": { "enum": ["claim", "mechanism", "evidence", "boundary_conditions", "counterexample", "implication"] }
+                    }
+                  }
+                },
+                "text_variants": {
+                  "type": "object",
+                  "required": ["long_form", "card_form"]
+                },
+                "lettering_layout": { "type": "object" },
+                "beat_duration": { "enum": ["instant", "short", "held", "fast", "normal", "pause"] },
+                "visual_density": {},
+                "text_density": {},
+                "visual_weight": { "enum": ["small", "standard", "large", "hero", "normal"] },
+                "pause_after": { "type": "boolean" },
+                "reveal_priority": {},
+                "layout_hint": { "enum": ["standard", "full-width", "close-emotion", "insert", "pause", "split-relation", "normal"] },
+                "emotional_anchor": { "type": "boolean" },
+                "anchor_subject": { "enum": ["human_face", "body_reaction", "fateful_moment"] },
+                "anchor_note": { "type": "string" },
+                "hook_type": { "enum": ["conflict", "mystery", "contrast", "stakes"] },
+                "hook_line": { "type": "string", "maxLength": 20 },
+                "is_cover_source": { "type": "boolean" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "grounding": {
+      "type": "object",
+      "required": ["type", "description", "why_this_mode", "factuality", "source_refs"],
+      "properties": {
+        "type": {
+          "enum": [
+            "contemporary_life",
+            "historical_reconstruction",
+            "institutional_process",
+            "source_world",
+            "material_detail",
+            "analogy",
+            "counterexample",
+            "diagrammatic"
+          ]
+        },
+        "description": { "type": "string" },
+        "why_this_mode": { "type": "string" },
+        "factuality": { "enum": ["source_fact", "source_interpretation", "source_based_reconstruction", "adaptation_bridge", "invented_bridge"] },
+        "source_refs": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

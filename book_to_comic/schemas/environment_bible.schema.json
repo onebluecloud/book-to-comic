@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Environment Bible 3.0",
+  "type": "object",
+  "required": ["schema_version", "planning_status", "environment_system", "environments"],
+  "properties": {
+    "schema_version": { "type": "string" },
+    "planning_status": { "type": "string" },
+    "environment_system": { "type": "object" },
+    "environments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "kind", "era", "geography", "anchors", "material_palette", "lighting", "unremovable_reason"]
+      }
+    }
+  }
+}

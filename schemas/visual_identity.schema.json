@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Visual Identity",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "planning_status",
+    "book_title",
+    "style_id",
+    "book_signature",
+    "adaptation_form",
+    "cast_model",
+    "character_system",
+    "environment_system",
+    "motif_system",
+    "palette_lighting",
+    "camera_composition",
+    "forbidden_carryover"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "planning_status": { "type": "string" },
+    "book_title": { "type": "string" },
+    "style_id": { "type": "string" },
+    "book_signature": { "type": "object" },
+    "adaptation_form": {
+      "type": "object",
+      "required": ["why_specific_to_this_book"]
+    },
+    "cast_model": { "type": "object" },
+    "character_system": { "type": "object" },
+    "environment_system": { "type": "object" },
+    "motif_system": { "type": "object" },
+    "palette_lighting": { "type": "object" },
+    "camera_composition": { "type": "object" },
+    "forbidden_carryover": { "type": "array" }
+  }
+}

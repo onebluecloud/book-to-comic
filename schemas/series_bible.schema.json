@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Series Bible",
+  "type": "object",
+  "required": ["schema_version", "planning_status", "book_title", "primary_thesis", "episodes"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "planning_status": { "type": "string" },
+    "book_title": { "type": "string" },
+    "primary_thesis": { "type": "string" },
+    "premise": { "type": "string" },
+    "themes": { "type": "array", "items": { "type": "string" } },
+    "arcs": { "type": "array" },
+    "episodes": { "type": "array" }
+  }
+}

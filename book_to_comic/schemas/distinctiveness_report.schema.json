@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Distinctiveness Report",
+  "type": "object",
+  "required": ["schema_version", "status", "overall_score", "comparisons"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "status": { "enum": ["passed", "warning", "failed"] },
+    "overall_score": { "type": "number" },
+    "comparisons": { "type": "array" },
+    "issues": { "type": "array" }
+  }
+}

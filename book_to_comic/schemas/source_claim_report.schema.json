@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Source Claim Report",
+  "type": "object",
+  "required": ["schema_version", "status", "concept_coverage", "claim_source_coverage", "issues"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "status": { "enum": ["passed", "warning", "failed"] },
+    "concept_coverage": { "type": "number" },
+    "claim_source_coverage": { "type": "number" },
+    "boundary_condition_coverage": { "type": "number" },
+    "invented_bridge_count": { "type": "integer" },
+    "invented_dialogue_count": { "type": "integer" },
+    "unsupported_claims": { "type": "array" },
+    "orphan_source_refs": { "type": "array" },
+    "panels": { "type": "array" },
+    "issues": { "type": "array" }
+  }
+}

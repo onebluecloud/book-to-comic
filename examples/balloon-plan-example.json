@@ -1,0 +1,103 @@
+{
+  "_comment": "宿主看图后写的画内气泡计划示例。坐标全部归一化 0-1（相对该格完整原图）。anchor=说话人嘴部（thought 用头部）；box=气泡可安放的负空间（天空/墙面/桌面），不得压脸、手、关键道具；text 只写台词本体（不带「说话人：」前缀），且必须引用该格已批准的 dialogue/text_variants 行，不得现编。写完运行 book-to-comic validate-balloon-plan --project <project>。",
+  "schema_version": "1.0",
+  "episode_id": "EP01",
+  "panels": [
+    {
+      "panel_id": "P03",
+      "panel_index": 3,
+      "balloons": [
+        {
+          "balloon_id": "B01",
+          "type": "speech",
+          "text": "我是不是一直都落后？",
+          "speaker": "林乔",
+          "anchor": {
+            "x": 0.56,
+            "y": 0.36
+          },
+          "box": {
+            "x": 0.02,
+            "y": 0.03,
+            "w": 0.42,
+            "h": 0.22
+          },
+          "tail": true,
+          "reading_order": 1
+        }
+      ],
+      "sfx": [
+        {
+          "text": "嗡",
+          "anchor": {
+            "x": 0.66,
+            "y": 0.62
+          },
+          "angle": -8,
+          "scale": 0.6,
+          "style": "soft"
+        }
+      ],
+      "no_go_boxes": [
+        {
+          "x": 0.38,
+          "y": 0.22,
+          "w": 0.24,
+          "h": 0.3,
+          "label": "主角脸"
+        },
+        {
+          "x": 0.55,
+          "y": 0.55,
+          "w": 0.2,
+          "h": 0.22,
+          "label": "握缰绳的手"
+        }
+      ]
+    },
+    {
+      "panel_id": "P09",
+      "panel_index": 9,
+      "balloons": [
+        {
+          "balloon_id": "B01",
+          "type": "thought",
+          "text": "连见面都像考试……",
+          "speaker": "林乔",
+          "anchor": {
+            "x": 0.5,
+            "y": 0.3
+          },
+          "box": {
+            "x": 0.55,
+            "y": 0.05,
+            "w": 0.4,
+            "h": 0.2
+          },
+          "tail": true,
+          "reading_order": 1
+        },
+        {
+          "balloon_id": "B02",
+          "type": "narration_box",
+          "text": "深夜十一点。",
+          "speaker": "",
+          "anchor": {
+            "x": 0.5,
+            "y": 0.5
+          },
+          "box": {
+            "x": 0.03,
+            "y": 0.85,
+            "w": 0.35,
+            "h": 0.11
+          },
+          "tail": false,
+          "reading_order": 2
+        }
+      ],
+      "sfx": []
+    }
+  ],
+  "writing_mode": "horizontal"
+}

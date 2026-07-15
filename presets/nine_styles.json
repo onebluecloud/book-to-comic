@@ -1,0 +1,2646 @@
+{
+  "schema_version": "2.0.0",
+  "stable_style_ids": [
+    "manga",
+    "webtoon-manhwa",
+    "manhua",
+    "franco-belgian-bd",
+    "editorial",
+    "comic-strip",
+    "doodle",
+    "retro-halftone",
+    "ink-sketch"
+  ],
+  "compatibility_aliases": {
+    "advanced-flat": "webtoon-manhwa",
+    "retro-comic": "retro-halftone",
+    "japanese-watercolor": "doodle",
+    "chinese-ink-line": "manhua"
+  },
+  "styles": {
+    "manga": {
+      "display_name": "日漫 / Manga — 电影化黑白漫画",
+      "short_name": "Manga Cinematic B&W",
+      "taxonomy": {
+        "tradition": "Japanese manga",
+        "format": "page-based sequential art",
+        "medium": "digital ink + screentone",
+        "note": "Manga 是巨大谱系；本预设锁定为适合自动化改编的电影化黑白默认值。"
+      },
+      "selection": {
+        "best_for": [
+          "强情绪",
+          "人物冲突",
+          "心理机制拟人化",
+          "动作与反应",
+          "文学戏剧场景"
+        ],
+        "avoid_for": [
+          "主要依赖复杂彩色信息图的内容",
+          "需要真实品牌或产品颜色的内容"
+        ],
+        "variants": [
+          "gekiga-cinematic",
+          "shonen-kinetic",
+          "shojo-romance",
+          "josei-everyday",
+          "classic-screentone",
+          "yonkoma-gag",
+          "chibi-sd-comic"
+        ],
+        "platforms": [
+          "page",
+          "card",
+          "pdf",
+          "cbz"
+        ]
+      },
+      "art_direction": {
+        "realism": 0.58,
+        "anatomy": "可信的人体结构，允许情绪和动作夸张；禁止统一幼态脸和通用动漫体型。",
+        "face": "为每个角色锁定脸型、眼型、鼻梁、下颌、发际线和年龄特征；眼睛大小由子变体控制。",
+        "shape_language": "角色轮廓对比明确；主角、对手和导师分别使用不同主形状。",
+        "line": "有压力变化的 G-pen/brush-pen 墨线；受光侧细、背光侧粗；内部结构线比外轮廓轻。",
+        "ink_value": "三值优先：纸白、网点中间调、实黑；大黑块用于构图和焦点，不把整格涂暗。",
+        "color": "默认纯黑白；封面或章节转折可有单一强调色，但正文不依赖彩色。",
+        "lighting": "用黑白分组表现动机光；强烈情绪可使用逆光、轮廓光和抽象背景。",
+        "texture": "网点、速度线、集中线、手绘排线按叙事需要使用，不能全画面均匀覆盖。",
+        "character": "表情范围大但结构稳定；手势和身体重心必须清楚；服装细节可重复绘制。",
+        "environment": "建立镜头详细，反应镜头适度简化；透视准确，场景锚点跨格保持。",
+        "props": "以清晰线稿、轮廓和少量排线说明材质；关键道具必须有状态变化。",
+        "camera": "近景和大特写比例较高；动作采用预备—动作—反应；避免八格全是中景。",
+        "paneling": "允许不规则格、斜切和越框，但阅读顺序必须清楚；中文交付默认左到右，除非用户明确要求日式右到左。",
+        "lettering": "正文后期叠加；对话气泡、内心旁白、拟声词分层；拟声词可成为构图元素。"
+      },
+      "prompt_blocks": {
+        "style_core": [
+          "finished cinematic black-and-white manga panel",
+          "expressive variable-weight brush-pen line art",
+          "clear silhouettes and controlled anatomy",
+          "three-value design: white paper, screentone midtones, spotted blacks",
+          "selective screentone and hatching, not uniform gray painting"
+        ],
+        "character": [
+          "preserve exact face geometry, age, hairstyle masses, costume layers and body proportions",
+          "express emotion through eyes, mouth corners, shoulders, hands and center of gravity"
+        ],
+        "environment": [
+          "accurate perspective and recurring location anchors",
+          "detailed establishing space, simplified background where emotion is the focal point"
+        ],
+        "camera": [
+          "cinematic shot with a single clear focal point",
+          "readable action and reaction, controlled foreshortening"
+        ],
+        "avoid": [
+          "generic anime key visual",
+          "3D render",
+          "gray digital painting without ink language",
+          "identical medium shot in every panel",
+          "random speed lines",
+          "embedded readable text"
+        ]
+      },
+      "qa": {
+        "signature": [
+          "墨线粗细变化",
+          "三值清楚",
+          "网点有功能",
+          "角色轮廓可识别",
+          "镜头节奏明显"
+        ],
+        "hard_fail": [
+          "角色变成通用动漫脸",
+          "无墨线的灰色插画",
+          "连续多格同一机位",
+          "场景透视崩坏",
+          "手脚畸形",
+          "图片中出现乱码文字"
+        ]
+      },
+      "sources": [
+        "S01",
+        "S02",
+        "S03",
+        "S05",
+        "S06",
+        "S25"
+      ],
+      "substyles": [
+        {
+          "id": "gekiga-cinematic",
+          "label": "剧画电影化",
+          "use_when": "成人、现实、心理、社会冲突或低调戏剧场景。",
+          "avoid_when": "轻喜剧、幼态萌系、强糖水偶像感。",
+          "visual_traits": [
+            "写实成人脸型和手部",
+            "低调镜头",
+            "高密度黑白光影"
+          ],
+          "prompt_additions": [
+            "Use the gekiga-cinematic substyle: grounded adult faces, cinematic framing, restrained acting, dense but controlled black-and-white values.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：写实成人脸型和手部",
+            "未触发排除项：轻喜剧、幼态萌系、强糖水偶像感。"
+          ],
+          "sources": [
+            "S01",
+            "S02",
+            "S27"
+          ]
+        },
+        {
+          "id": "shonen-kinetic",
+          "label": "少年漫画动势",
+          "use_when": "行动、竞争、训练、决断和外化情绪的桥段。",
+          "avoid_when": "安静社科解释或需要低戏剧性的叙述。",
+          "visual_traits": [
+            "速度线和集中线有方向",
+            "预备-动作-反应明确",
+            "姿态夸张但结构可信"
+          ],
+          "prompt_additions": [
+            "Use the shonen-kinetic substyle: kinetic action timing, force lines with clear direction, anticipation-action-reaction beats.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：速度线和集中线有方向",
+            "未触发排除项：安静社科解释或需要低戏剧性的叙述。"
+          ],
+          "sources": [
+            "S01",
+            "S05",
+            "S06"
+          ]
+        },
+        {
+          "id": "shojo-romance",
+          "label": "少女漫画情绪",
+          "use_when": "亲密关系、内心波动、暧昧、回忆和柔性情绪。",
+          "avoid_when": "硬核战斗、讽刺观点或厚重现实主义。",
+          "visual_traits": [
+            "细腻眼神和表情",
+            "花纹或光斑只服务情绪",
+            "留白和软边节奏"
+          ],
+          "prompt_additions": [
+            "Use the shojo-romance substyle: delicate facial acting, airy negative space, emotional motifs used sparingly around the focal beat.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：细腻眼神和表情",
+            "未触发排除项：硬核战斗、讽刺观点或厚重现实主义。"
+          ],
+          "sources": [
+            "S01",
+            "S26"
+          ]
+        },
+        {
+          "id": "josei-everyday",
+          "label": "女性向日常成人",
+          "use_when": "成年人日常、职场、婚恋、家庭和自我观察。",
+          "avoid_when": "少年热血打斗或超现实夸张喜剧。",
+          "visual_traits": [
+            "成人比例自然",
+            "服装生活化",
+            "细微表情和克制分镜"
+          ],
+          "prompt_additions": [
+            "Use the josei-everyday substyle: natural adult proportions, everyday clothing detail, restrained paneling focused on subtle reactions.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：成人比例自然",
+            "未触发排除项：少年热血打斗或超现实夸张喜剧。"
+          ],
+          "sources": [
+            "S01",
+            "S26"
+          ]
+        },
+        {
+          "id": "classic-screentone",
+          "label": "经典网点页漫",
+          "use_when": "需要强烈黑白漫画质感和印刷页感的章节。",
+          "avoid_when": "全彩移动端或无墨线数字厚涂。",
+          "visual_traits": [
+            "网点密度随体积变化",
+            "实黑分布有构图功能",
+            "纸白保留清楚"
+          ],
+          "prompt_additions": [
+            "Use the classic-screentone substyle: classic screentone page language with functional dot density, spotted blacks, and clean paper whites.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：网点密度随体积变化",
+            "未触发排除项：全彩移动端或无墨线数字厚涂。"
+          ],
+          "sources": [
+            "S01",
+            "S06",
+            "S25"
+          ]
+        },
+        {
+          "id": "yonkoma-gag",
+          "label": "四格起承转合",
+          "use_when": "短幽默、轻知识、固定角色关系和节奏型反转。",
+          "avoid_when": "需要长动作连续性或复杂世界建立的段落。",
+          "visual_traits": [
+            "四格节奏稳定",
+            "最后一格落点清楚",
+            "角色姿态差异明显"
+          ],
+          "prompt_additions": [
+            "Use the yonkoma-gag substyle: four-beat setup-development-turn-reaction rhythm with compact readable acting.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：四格节奏稳定",
+            "未触发排除项：需要长动作连续性或复杂世界建立的段落。"
+          ],
+          "sources": [
+            "S28",
+            "S16",
+            "S17"
+          ]
+        },
+        {
+          "id": "chibi-sd-comic",
+          "label": "Q版 SD 喜剧",
+          "use_when": "插入式吐槽、轻松解释、可爱化反应和情绪符号。",
+          "avoid_when": "严肃历史、成人现实主义或需要高可信人体的场景。",
+          "visual_traits": [
+            "头身比夸张但轮廓稳定",
+            "表情符号化",
+            "道具和动作简化"
+          ],
+          "prompt_additions": [
+            "Use the chibi-sd-comic substyle: super-deformed comic acting with stable silhouettes, clear symbolic expressions, and simplified props.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：头身比夸张但轮廓稳定",
+            "未触发排除项：严肃历史、成人现实主义或需要高可信人体的场景。"
+          ],
+          "sources": [
+            "S29",
+            "S07",
+            "S08"
+          ]
+        }
+      ],
+      "balloon_style": {
+        "fill_strategy": "classic",
+        "cloud_lobe_scale": 0.3,
+        "burst_spikes": 18,
+        "burst_amplitude": 0.16,
+        "outline_scale": 1.0,
+        "speech_jitter": 0.02
+      }
+    },
+    "webtoon-manhwa": {
+      "display_name": "韩漫 / Webtoon-Manhwa — 精修全彩纵向漫画",
+      "short_name": "Polished Vertical Webtoon",
+      "taxonomy": {
+        "tradition": "Korean digital comics",
+        "format": "mobile-first vertical scroll",
+        "medium": "full-color digital line + gradient",
+        "note": "Webtoon 首先是阅读和版式体系，不是单一脸型。"
+      },
+      "selection": {
+        "best_for": [
+          "手机竖滑",
+          "人物关系",
+          "都市故事",
+          "情绪递进",
+          "连续剧情",
+          "年轻受众"
+        ],
+        "avoid_for": [
+          "严格黑白印刷",
+          "必须在一页同时呈现大量并列信息"
+        ],
+        "variants": [
+          "romance-polished",
+          "romance-fantasy",
+          "urban-drama",
+          "action-cinematic",
+          "thriller-horror-scroll",
+          "slice-of-life-soft-color",
+          "campus-office-drama"
+        ],
+        "platforms": [
+          "vertical-scroll",
+          "card",
+          "mobile"
+        ]
+      },
+      "art_direction": {
+        "realism": 0.64,
+        "anatomy": "偏修长但结构可信；避免过长四肢、过小头和统一模特体型。",
+        "face": "精修、清洁、易在手机小屏识别；主要角色的眉眼、鼻口、发型轮廓必须区分。",
+        "shape_language": "人物剪影优先，服装层级简化，重点细节集中在头发、外套和标志性配件。",
+        "line": "清洁锐利的数字线稿，外轮廓比内部线略重；允许柔和无描边区域，但不能全部变成厚涂。",
+        "ink_value": "用局部深色和环境光建立层次，避免全局高曝光和皮肤塑料感。",
+        "color": "全彩；角色局部色稳定；场景使用渐变和色温过渡；每一幕有明确情绪色。",
+        "lighting": "柔和主光配局部高光；高潮可提高对比；纵向长镜头可用光线渐变连接空间或时间。",
+        "texture": "数字完成度高但保留少量材质差异；皮肤、头发、布料、金属不能用同一种光泽。",
+        "character": "细节量适合周更重复生产；表情在手机尺寸仍清楚；避免所有人物同脸。",
+        "environment": "反复场景需锁定平面关系；建立镜头和纵向揭示可较详细，近景背景可降密度。",
+        "props": "道具外形清楚、颜色稳定，适合在竖屏近景中快速识别。",
+        "camera": "利用纵向落差、上下视线和滚动揭示；动作方向优先纵向或对角线。",
+        "paneling": "留白是时间和情绪工具；近距离格加快节奏，长空白和长格用于转场、悬念、坠落或空间扩展。",
+        "lettering": "手机可读字号；气泡沿纵向阅读流交错布置；避免一屏塞入过多文字。"
+      },
+      "prompt_blocks": {
+        "style_core": [
+          "finished polished Korean vertical-webtoon panel",
+          "clean crisp digital line art",
+          "refined full-color rendering with controlled soft gradients",
+          "mobile-readable faces and silhouettes",
+          "cinematic vertical staging"
+        ],
+        "character": [
+          "repeatable costume design and distinct face geometry",
+          "natural hands and elegant but believable anatomy"
+        ],
+        "environment": [
+          "consistent recurring environment layout",
+          "selective detail with clear depth layers and mobile-scale focal hierarchy"
+        ],
+        "camera": [
+          "composition designed for vertical scroll reveal",
+          "strong top-to-bottom eye flow and readable emotional beat"
+        ],
+        "avoid": [
+          "generic beauty-filter faces",
+          "plastic 3D skin",
+          "overlong limbs",
+          "same glossy material on every surface",
+          "horizontal page collage",
+          "embedded text"
+        ]
+      },
+      "qa": {
+        "signature": [
+          "纵向阅读流",
+          "全彩但受控",
+          "手机尺寸表情清楚",
+          "留白参与节奏",
+          "角色不撞脸"
+        ],
+        "hard_fail": [
+          "把普通横页直接裁成长图",
+          "小屏无法辨认动作",
+          "全员同脸",
+          "背景每格重置",
+          "服装颜色漂移",
+          "光泽塑料化"
+        ]
+      },
+      "sources": [
+        "S05",
+        "S06",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "substyles": [
+        {
+          "id": "romance-polished",
+          "label": "精修恋爱韩漫",
+          "use_when": "恋爱、情绪升温、人物吸引力和关系推进。",
+          "avoid_when": "粗粝黑白现实主义或强讽刺单格。",
+          "visual_traits": [
+            "精修脸部但不撞脸",
+            "柔和渐变和高光",
+            "手机屏表情清楚"
+          ],
+          "prompt_additions": [
+            "Use the romance-polished substyle: polished romance webtoon rendering with distinct faces, controlled glow, and mobile-readable expressions.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：精修脸部但不撞脸",
+            "未触发排除项：粗粝黑白现实主义或强讽刺单格。"
+          ],
+          "sources": [
+            "S10",
+            "S11",
+            "S30"
+          ]
+        },
+        {
+          "id": "romance-fantasy",
+          "label": "韩漫罗曼奇幻",
+          "use_when": "贵族、宫廷、奇幻恋爱、身份差和强服装符号。",
+          "avoid_when": "现代写实职场或朴素知识解释。",
+          "visual_traits": [
+            "华丽服饰分层",
+            "装饰不压过人物",
+            "竖向揭示空间"
+          ],
+          "prompt_additions": [
+            "Use the romance-fantasy substyle: romance-fantasy webtoon staging with elegant costume hierarchy, luminous color, and vertical reveal.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：华丽服饰分层",
+            "未触发排除项：现代写实职场或朴素知识解释。"
+          ],
+          "sources": [
+            "S10",
+            "S11",
+            "S30"
+          ]
+        },
+        {
+          "id": "urban-drama",
+          "label": "都市剧情韩漫",
+          "use_when": "职场、校园、家庭、都市关系和现实剧情。",
+          "avoid_when": "古风仙侠或夸张超能力动作。",
+          "visual_traits": [
+            "现代空间准确",
+            "服装职业感",
+            "室内外光源可信"
+          ],
+          "prompt_additions": [
+            "Use the urban-drama substyle: contemporary urban drama with clean interiors, role-specific clothing, and restrained emotional color.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：现代空间准确",
+            "未触发排除项：古风仙侠或夸张超能力动作。"
+          ],
+          "sources": [
+            "S10",
+            "S12",
+            "S30"
+          ]
+        },
+        {
+          "id": "action-cinematic",
+          "label": "电影化动作韩漫",
+          "use_when": "追逐、冲突、悬疑揭示和竖屏动作段落。",
+          "avoid_when": "静态观点插画或只需要一图一喻。",
+          "visual_traits": [
+            "纵向动作方向",
+            "滚动悬念",
+            "动态近景与长格交替"
+          ],
+          "prompt_additions": [
+            "Use the action-cinematic substyle: vertical cinematic action with top-to-bottom motion, suspenseful long panels, and readable impact beats.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：纵向动作方向",
+            "未触发排除项：静态观点插画或只需要一图一喻。"
+          ],
+          "sources": [
+            "S11",
+            "S12",
+            "S30"
+          ]
+        },
+        {
+          "id": "thriller-horror-scroll",
+          "label": "惊悚悬疑竖滑",
+          "use_when": "恐惧、未知、反转、夜景和压迫感。",
+          "avoid_when": "明亮治愈、轻松读书笔记或儿童感内容。",
+          "visual_traits": [
+            "长留白制造时间",
+            "暗部层次受控",
+            "局部红色或冷色焦点"
+          ],
+          "prompt_additions": [
+            "Use the thriller-horror-scroll substyle: scroll-based suspense with controlled darkness, long pauses, and one clear color accent at the reveal.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：长留白制造时间",
+            "未触发排除项：明亮治愈、轻松读书笔记或儿童感内容。"
+          ],
+          "sources": [
+            "S11",
+            "S12",
+            "S30"
+          ]
+        },
+        {
+          "id": "slice-of-life-soft-color",
+          "label": "柔和彩色日常",
+          "use_when": "治愈、家庭、友情、轻生活和低冲突叙事。",
+          "avoid_when": "高爆发战斗或尖锐政治讽刺。",
+          "visual_traits": [
+            "低饱和暖色",
+            "表演细小",
+            "背景简化但稳定"
+          ],
+          "prompt_additions": [
+            "Use the slice-of-life-soft-color substyle: soft-color slice-of-life webtoon with warm low-saturation palettes and gentle body-language changes.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：低饱和暖色",
+            "未触发排除项：高爆发战斗或尖锐政治讽刺。"
+          ],
+          "sources": [
+            "S10",
+            "S30"
+          ]
+        },
+        {
+          "id": "campus-office-drama",
+          "label": "校园职场快节奏",
+          "use_when": "年轻人群、校园/办公室、社媒连载和高频对话。",
+          "avoid_when": "历史史诗或复杂机械硬科幻。",
+          "visual_traits": [
+            "制服或职业服稳定",
+            "气泡安全区充足",
+            "节奏短促"
+          ],
+          "prompt_additions": [
+            "Use the campus-office-drama substyle: mobile-first campus or office drama with repeatable outfits, generous balloon-safe space, and quick beats.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：制服或职业服稳定",
+            "未触发排除项：历史史诗或复杂机械硬科幻。"
+          ],
+          "sources": [
+            "S10",
+            "S11",
+            "S30"
+          ]
+        },
+        {
+          "id": "painterly-epic-cinema",
+          "label": "厚涂史诗电影",
+          "use_when": "黑暗奇幻、史诗科幻、战争与人物命运戏，需要电影级情绪浓度时。",
+          "avoid_when": "儿童绘本、轻松搞笑、低龄科普与轻快恋爱日常。",
+          "visual_traits": [
+            "绘画笔触覆盖在可控三维体积上，线条隐入边缘",
+            "雕塑感面部结构+戏剧化轮廓光",
+            "低饱和电影调色，仅一到两个高纯度强调色",
+            "大格少切、表演优先于特效"
+          ],
+          "prompt_additions": [
+            "Use the painterly-epic-cinema substyle: painterly cinematic frames with semi-realistic characters, sculpted facial planes, visible textured brushwork, dramatic rim light and moody color grading; keep overall saturation restrained with one or two high-purity accent colors, and let acting lead over effects.",
+            "Avoid: plastic skin, glossy 3D game render, fantasy effect overload, generic concept art, flat lighting.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：面部雕塑感与轮廓光同时在场，特效不遮挡表演",
+            "未触发排除项：儿童绘本、轻喜剧、低龄科普。"
+          ],
+          "sources": [
+            "S50"
+          ]
+        }
+      ],
+      "balloon_style": {
+        "fill_strategy": "classic",
+        "cloud_lobe_scale": 0.26,
+        "burst_spikes": 14,
+        "burst_amplitude": 0.11,
+        "outline_scale": 0.9,
+        "speech_jitter": 0.0
+      }
+    },
+    "manhua": {
+      "display_name": "国漫 / Manhua — 现代中文全彩漫画",
+      "short_name": "Modern Chinese Full-Color Manhua",
+      "taxonomy": {
+        "tradition": "Chinese comics / manhua",
+        "format": "digital page or vertical social comic",
+        "medium": "full-color digital line with optional painterly or ink accents",
+        "note": "不能把国漫等同于仙侠、古风或游戏概念图；文化与时代由书籍内容决定。"
+      },
+      "selection": {
+        "best_for": [
+          "中文社媒",
+          "都市与历史",
+          "中国文化内容",
+          "现实题材",
+          "人物剧情",
+          "全彩知识叙事"
+        ],
+        "avoid_for": [
+          "明确要求纯黑白日漫语法的项目"
+        ],
+        "variants": [
+          "modern-urban",
+          "historical-elegant",
+          "wuxia-action",
+          "xianxia-fantasy",
+          "ink-accented",
+          "lianhuanhua-retro",
+          "social-realism"
+        ],
+        "platforms": [
+          "card",
+          "vertical-scroll",
+          "page",
+          "wechat"
+        ]
+      },
+      "art_direction": {
+        "realism": 0.66,
+        "anatomy": "自然、克制、适合成年人和多年龄角色；不得默认所有角色年轻、纤细、白皙。",
+        "face": "依据地域、年代、职业和年龄设计；保留中文读者熟悉的现实细节，而不是统一偶像脸。",
+        "shape_language": "现代题材强调职业、生活方式和社会身份；历史题材强调轮廓、层叠服装和时代器物。",
+        "line": "清洁但略带绘画感的数字线稿；可有书法式收笔或墨色变化，但不能机械复制水墨符号。",
+        "ink_value": "彩色为主，深浅结构清楚；需要国画气质时使用留白、虚实和墨色层次，而不是加一层水墨滤镜。",
+        "color": "丰富但受控；建立文化与时代色板；古代题材避免影楼式金红满屏，现代题材避免统一霓虹蓝紫。",
+        "lighting": "自然光源与环境色明确；历史室内考虑窗、灯、烛火；现代城市考虑广告光、室内灯和天气。",
+        "texture": "丝、棉、麻、木、石、漆、纸、金属等材质需有区分；传统纹样必须与时代和身份相符。",
+        "character": "姿态克制但表演清楚；服装、发型和配件承担身份信息。",
+        "environment": "文化和地域准确；街道、室内、园林、办公空间不能只做泛亚洲背景。",
+        "props": "器物造型、握持方式、书写方向、包装和标识逻辑需符合年代；不生成可读伪文字。",
+        "camera": "兼顾人物情绪与环境叙事；可使用借景、框景、层层推进，但必须服务故事。",
+        "paneling": "页面或竖向均可；中文阅读顺序明确；重要文化细节给道具特写。",
+        "lettering": "中文标点、行长和字重适配；气泡与旁白后期叠加，避免模型生成汉字。"
+      },
+      "prompt_blocks": {
+        "style_core": [
+          "finished modern Chinese full-color comic panel",
+          "clean expressive digital linework with restrained painterly accents",
+          "culturally and historically specific design",
+          "rich but controlled color palette",
+          "clear modern sequential storytelling"
+        ],
+        "character": [
+          "source-appropriate age, ethnicity, body type, occupation and era",
+          "distinct facial geometry and costume hierarchy"
+        ],
+        "environment": [
+          "specific Chinese regional, urban, historical or domestic environment only when supported by the story",
+          "accurate architecture, materials and spatial anchors"
+        ],
+        "camera": [
+          "balanced character acting and environmental storytelling",
+          "clear focal hierarchy and readable Chinese social-media composition"
+        ],
+        "avoid": [
+          "generic xianxia game art",
+          "automatic hanfu",
+          "whitewashed idol faces",
+          "random dragons, clouds or ink splashes",
+          "fantasy palace for modern scenes",
+          "embedded Chinese pseudo-text"
+        ]
+      },
+      "qa": {
+        "signature": [
+          "文化和时代准确",
+          "全彩不浮艳",
+          "人物年龄身份明确",
+          "环境不是泛亚洲",
+          "材质和器物可信"
+        ],
+        "hard_fail": [
+          "现代书被强制古风",
+          "所有人物同一网红脸",
+          "服装与年代错位",
+          "伪汉字",
+          "背景使用无关宫殿或仙侠元素",
+          "肤色和体型被统一"
+        ]
+      },
+      "sources": [
+        "S13",
+        "S14",
+        "S05",
+        "S09"
+      ],
+      "substyles": [
+        {
+          "id": "modern-urban",
+          "label": "现代都市国漫",
+          "use_when": "当代中文城市、职场、家庭、消费和现实关系。",
+          "avoid_when": "古代仙侠或泛亚洲幻想背景。",
+          "visual_traits": [
+            "城市地域和年代明确",
+            "人物年龄职业有差异",
+            "全彩但不过度霓虹"
+          ],
+          "prompt_additions": [
+            "Use the modern-urban substyle: modern Chinese urban comic with specific city details, differentiated social roles, and controlled full color.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：城市地域和年代明确",
+            "未触发排除项：古代仙侠或泛亚洲幻想背景。"
+          ],
+          "sources": [
+            "S13",
+            "S14",
+            "S31"
+          ]
+        },
+        {
+          "id": "historical-elegant",
+          "label": "历史雅致国漫",
+          "use_when": "真实历史、古代生活、文人场景和含蓄情绪。",
+          "avoid_when": "无根据的仙气滤镜或影楼式金红满屏。",
+          "visual_traits": [
+            "服装器物按时代",
+            "留白和层次克制",
+            "室内光源可信"
+          ],
+          "prompt_additions": [
+            "Use the historical-elegant substyle: historically grounded Chinese comic design with era-specific costume, props, architecture, and restrained color.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：服装器物按时代",
+            "未触发排除项：无根据的仙气滤镜或影楼式金红满屏。"
+          ],
+          "sources": [
+            "S13",
+            "S14",
+            "S34"
+          ]
+        },
+        {
+          "id": "wuxia-action",
+          "label": "武侠动作国漫",
+          "use_when": "江湖、门派、身法、刀剑拳脚和侠义冲突。",
+          "avoid_when": "现代职场、社科解释或无动作的日常章节。",
+          "visual_traits": [
+            "动作轨迹清楚",
+            "兵器握持可信",
+            "山水和建筑服务场面"
+          ],
+          "prompt_additions": [
+            "Use the wuxia-action substyle: wuxia action staging with readable weapon handling, flowing silhouettes, and disciplined motion arcs.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：动作轨迹清楚",
+            "未触发排除项：现代职场、社科解释或无动作的日常章节。"
+          ],
+          "sources": [
+            "S31",
+            "S32",
+            "S33"
+          ]
+        },
+        {
+          "id": "xianxia-fantasy",
+          "label": "仙侠玄幻国漫",
+          "use_when": "修行、神话化空间、灵力视觉和高概念幻想。",
+          "avoid_when": "现实纪实、严肃历史考据或低调文学叙事。",
+          "visual_traits": [
+            "幻想元素有规则",
+            "光效不遮挡人体",
+            "服饰等级清楚"
+          ],
+          "prompt_additions": [
+            "Use the xianxia-fantasy substyle: Chinese xianxia fantasy comic with rule-based magical effects, readable anatomy, and cultural design logic.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：幻想元素有规则",
+            "未触发排除项：现实纪实、严肃历史考据或低调文学叙事。"
+          ],
+          "sources": [
+            "S31",
+            "S32"
+          ]
+        },
+        {
+          "id": "ink-accented",
+          "label": "水墨点染国漫",
+          "use_when": "需要中国画气质、意境、留白和虚实关系。",
+          "avoid_when": "高饱和商业海报或写实产品展示。",
+          "visual_traits": [
+            "墨色只在关键处点染",
+            "留白参与构图",
+            "线稿仍保持漫画可读"
+          ],
+          "prompt_additions": [
+            "Use the ink-accented substyle: full-color manhua with restrained ink accents, atmospheric voids, and clear comic linework.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：墨色只在关键处点染",
+            "未触发排除项：高饱和商业海报或写实产品展示。"
+          ],
+          "sources": [
+            "S13",
+            "S21"
+          ]
+        },
+        {
+          "id": "lianhuanhua-retro",
+          "label": "连环画复古叙事",
+          "use_when": "历史回忆、传统故事、年代感叙述和图文册页气质。",
+          "avoid_when": "现代竖滑偶像韩漫或强渐变数字精修。",
+          "visual_traits": [
+            "册页式构图",
+            "线描和局部明暗",
+            "画面叙事重于特效"
+          ],
+          "prompt_additions": [
+            "Use the lianhuanhua-retro substyle: lianhuanhua-inspired sequential illustration with page-like composition, clear line drawing, and restrained tone.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：册页式构图",
+            "未触发排除项：现代竖滑偶像韩漫或强渐变数字精修。"
+          ],
+          "sources": [
+            "S34",
+            "S13",
+            "S16"
+          ]
+        },
+        {
+          "id": "social-realism",
+          "label": "社会现实国漫",
+          "use_when": "现实议题、基层生活、家庭困境和时代观察。",
+          "avoid_when": "仙侠、偶像恋爱或纯装饰古风。",
+          "visual_traits": [
+            "普通人面孔",
+            "生活空间具体",
+            "色彩朴素但有层次"
+          ],
+          "prompt_additions": [
+            "Use the social-realism substyle: grounded Chinese social realism with ordinary faces, specific lived-in spaces, and sober color design.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：普通人面孔",
+            "未触发排除项：仙侠、偶像恋爱或纯装饰古风。"
+          ],
+          "sources": [
+            "S13",
+            "S14",
+            "S31"
+          ]
+        }
+      ],
+      "balloon_style": {
+        "fill_strategy": "adaptive",
+        "cloud_lobe_scale": 0.28,
+        "burst_spikes": 16,
+        "burst_amplitude": 0.12,
+        "outline_scale": 1.0,
+        "speech_jitter": 0.0
+      }
+    },
+    "franco-belgian-bd": {
+      "display_name": "法比漫画 / Franco-Belgian BD — 清线欧洲册页",
+      "short_name": "Ligne Claire European Album",
+      "taxonomy": {
+        "tradition": "Franco-Belgian bande dessinée",
+        "format": "album/page",
+        "medium": "clean ink + flat color",
+        "note": "当前默认锁定 ligne claire，但不得把整个 BD 传统简化成圆头点眼。"
+      },
+      "selection": {
+        "best_for": [
+          "社科和历史",
+          "观点解释",
+          "旅行与冒险",
+          "复杂场景",
+          "需要高级、清楚、耐读的内容"
+        ],
+        "avoid_for": [
+          "依赖极端暗黑厚涂或高频动作爆发的场景"
+        ],
+        "variants": [
+          "brussels-clear-line",
+          "marcinelle-comic-dynamic",
+          "atom-style-retro-modern",
+          "realistic-adventure",
+          "semi-realistic-travel",
+          "big-nose-humor",
+          "watercolor-album"
+        ],
+        "platforms": [
+          "page",
+          "pdf",
+          "card",
+          "album"
+        ]
+      },
+      "art_direction": {
+        "realism": 0.55,
+        "anatomy": "角色可简化或半写实，但比例稳定、动作清楚；不强制圆头点眼。",
+        "face": "五官简洁、识别性高，表情依赖眉眼、嘴型和姿态；不同年龄和职业必须区分。",
+        "shape_language": "清楚、几何、轮廓稳定；人物简化与相对真实的环境形成可读对比。",
+        "line": "清晰黑色轮廓，粗细变化有限且有纪律；少排线或无排线；所有重要物体都有可读边界。",
+        "ink_value": "不依赖大片渐变阴影；通过轮廓、局部固有色、少量投影和构图分组建立层次。",
+        "color": "暖而清楚的平涂色；有限阴影；相邻色块需有足够区分。",
+        "lighting": "光源明确但处理简洁；阴影形状干净，避免写实渲染淹没线条。",
+        "texture": "低纹理；材料主要靠形状、局部线和颜色表达。",
+        "character": "表演清楚、姿态可读、重复绘制稳定；服装结构比装饰细节更重要。",
+        "environment": "背景精确、透视可读、道路建筑家具关系清楚； recurring location 建立平面图。",
+        "props": "机械、交通工具、器物和家具可有工程式清晰度；关键道具轮廓要准确。",
+        "camera": "以 35–50mm 的可读空间为主，穿插道具特写和反应近景；不过度使用景深模糊。",
+        "paneling": "规则格与适度变化；每格信息完整；动作连续性清楚。",
+        "lettering": "清洁气泡和旁白框；字体中性、可读；气泡不遮挡精确背景中的关键线索。"
+      },
+      "prompt_blocks": {
+        "style_core": [
+          "finished Franco-Belgian album comic panel",
+          "disciplined ligne-claire ink contours",
+          "precise readable environments",
+          "warm controlled flat colors with minimal shading",
+          "clear acting and elegant visual storytelling"
+        ],
+        "character": [
+          "stable stylized proportions and distinct silhouettes",
+          "simple but specific faces, not generic round-headed mascots"
+        ],
+        "environment": [
+          "accurate perspective, architecture and object placement",
+          "foreground, midground and background remain readable without blur"
+        ],
+        "camera": [
+          "clear 35mm-to-50mm staging with readable spatial relationships",
+          "one focused narrative beat"
+        ],
+        "avoid": [
+          "anime face language",
+          "painterly concept art",
+          "heavy cross-hatching",
+          "cinematic depth-of-field blur",
+          "overly childish dot-eye characters",
+          "embedded text"
+        ]
+      },
+      "qa": {
+        "signature": [
+          "清楚轮廓",
+          "低排线",
+          "平涂色",
+          "背景精确",
+          "空间关系一眼可读"
+        ],
+        "hard_fail": [
+          "把 BD 固定成幼儿圆头",
+          "背景模糊或随意",
+          "厚涂油画感",
+          "阴影过重",
+          "线条粗细无纪律",
+          "复杂环境透视错误"
+        ]
+      },
+      "sources": [
+        "S15",
+        "S05",
+        "S24"
+      ],
+      "substyles": [
+        {
+          "id": "brussels-clear-line",
+          "label": "布鲁塞尔清线",
+          "use_when": "旅行、历史、解释、冒险和需要极高清晰度的页面。",
+          "avoid_when": "暗黑厚涂、强网点美漫或日漫速度线。",
+          "visual_traits": [
+            "均匀清楚轮廓",
+            "少阴影少排线",
+            "平涂色和精确环境"
+          ],
+          "prompt_additions": [
+            "Use the brussels-clear-line substyle: ligne claire page design with crisp contours, flat color, minimal hatching, and precise environments.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：均匀清楚轮廓",
+            "未触发排除项：暗黑厚涂、强网点美漫或日漫速度线。"
+          ],
+          "sources": [
+            "S15",
+            "S35",
+            "S24"
+          ]
+        },
+        {
+          "id": "marcinelle-comic-dynamic",
+          "label": "马西内尔动态喜剧",
+          "use_when": "幽默冒险、夸张动作、儿童到大众向的轻快叙事。",
+          "avoid_when": "冷静社科图解或极端写实成人剧。",
+          "visual_traits": [
+            "弹性姿态",
+            "表情夸张",
+            "动作线更活泼"
+          ],
+          "prompt_additions": [
+            "Use the marcinelle-comic-dynamic substyle: Marcinelle-school energy with elastic posing, lively faces, and readable comic motion.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：弹性姿态",
+            "未触发排除项：冷静社科图解或极端写实成人剧。"
+          ],
+          "sources": [
+            "S36",
+            "S16"
+          ]
+        },
+        {
+          "id": "atom-style-retro-modern",
+          "label": "原子风复古现代",
+          "use_when": "中世纪现代、科技乐观、复古未来和设计感解释。",
+          "avoid_when": "古代中国题材或严肃黑白文学。",
+          "visual_traits": [
+            "几何建筑和家具",
+            "圆润机械形",
+            "明快复古色"
+          ],
+          "prompt_additions": [
+            "Use the atom-style-retro-modern substyle: atom-style retro-modern BD with geometric design, optimistic technology shapes, and clean flat color.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：几何建筑和家具",
+            "未触发排除项：古代中国题材或严肃黑白文学。"
+          ],
+          "sources": [
+            "S37",
+            "S15"
+          ]
+        },
+        {
+          "id": "realistic-adventure",
+          "label": "半写实冒险册页",
+          "use_when": "探险、历史事件、战争边缘、交通工具和复杂场景。",
+          "avoid_when": "极简涂鸦或一图一喻编辑漫画。",
+          "visual_traits": [
+            "半写实人体",
+            "道具工程感",
+            "背景透视严谨"
+          ],
+          "prompt_additions": [
+            "Use the realistic-adventure substyle: semi-realistic European adventure album with precise props, grounded anatomy, and coherent geography.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：半写实人体",
+            "未触发排除项：极简涂鸦或一图一喻编辑漫画。"
+          ],
+          "sources": [
+            "S16",
+            "S24"
+          ]
+        },
+        {
+          "id": "semi-realistic-travel",
+          "label": "旅行纪实册页",
+          "use_when": "城市、路途、文化观察、风景和知识性游记。",
+          "avoid_when": "高强度战斗或强恐怖悬疑。",
+          "visual_traits": [
+            "空间清楚",
+            "人物与地点同等重要",
+            "局部水彩或平涂"
+          ],
+          "prompt_additions": [
+            "Use the semi-realistic-travel substyle: travel-album BD with readable places, calm staging, and location-specific objects.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：空间清楚",
+            "未触发排除项：高强度战斗或强恐怖悬疑。"
+          ],
+          "sources": [
+            "S15",
+            "S16",
+            "S24"
+          ]
+        },
+        {
+          "id": "big-nose-humor",
+          "label": "大鼻子幽默传统",
+          "use_when": "讽刺、群像喜剧、夸张性格和轻冒险。",
+          "avoid_when": "需要严肃真实肖像或高端产品写实。",
+          "visual_traits": [
+            "脸部特征夸张",
+            "身体表演强",
+            "背景仍清楚"
+          ],
+          "prompt_additions": [
+            "Use the big-nose-humor substyle: European comic humor with exaggerated facial features, strong body acting, and clean readable scenery.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：脸部特征夸张",
+            "未触发排除项：需要严肃真实肖像或高端产品写实。"
+          ],
+          "sources": [
+            "S36",
+            "S16"
+          ]
+        },
+        {
+          "id": "watercolor-album",
+          "label": "水彩册页",
+          "use_when": "柔和历史、旅行、回忆、文学和情绪型册页。",
+          "avoid_when": "需要硬朗工业设计或强烈爆炸视觉。",
+          "visual_traits": [
+            "透明色层",
+            "线条仍占主导",
+            "情绪光色克制"
+          ],
+          "prompt_additions": [
+            "Use the watercolor-album substyle: European album watercolor finish with transparent washes, clear ink structure, and restrained atmosphere.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：透明色层",
+            "未触发排除项：需要硬朗工业设计或强烈爆炸视觉。"
+          ],
+          "sources": [
+            "S15",
+            "S24"
+          ]
+        },
+        {
+          "id": "storybook-nature-anime",
+          "label": "自然水彩绘本",
+          "use_when": "童话、儿童文学、散文、家庭叙事与自然成长主题，需要温柔治愈观感时。",
+          "avoid_when": "强暴力、高刺激爽文、赛博朋克与黑暗惊悚。",
+          "visual_traits": [
+            "水彩质感背景+空气透视",
+            "柔和自然光与克制阴影",
+            "生活细节入画（炊烟、窗光、草木、器物）",
+            "人物简洁自然，表情收敛而准确"
+          ],
+          "prompt_additions": [
+            "Use the storybook-nature-anime substyle: warm hand-drawn storybook framing with watercolor-like backgrounds, soft natural light, atmospheric perspective, gentle simplified characters with restrained accurate expressions, and lovingly observed everyday details; keep saturation moderate on warm-gray and sage-green bases.",
+            "Avoid: oversaturated anime colors, glossy digital skin, plastic 3D render, hard neon light, over-cute chibi faces.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：水彩层与自然光在场，背景与人物属于同一世界（禁背景精致、人物廉价的分离感）",
+            "未触发排除项：强暴力、赛博朋克、高刺激爽文。"
+          ],
+          "sources": [
+            "S50"
+          ]
+        },
+        {
+          "id": "deco-chiaroscuro",
+          "label": "装饰黑金明暗",
+          "use_when": "悲壮文学、命运悲剧、旧时代幻想与美与毁灭并存的题材（战争创伤、家国兴衰、挽歌式叙事）。",
+          "avoid_when": "轻松日常、儿童内容、搞笑吐槽与现代都市轻叙事。",
+          "visual_traits": [
+            "黑金材质母题（黑曜石底+鎏金饰边+暗木）贯穿服装与环境",
+            "明暗对照布光，雾中逆光剥出人物轮廓",
+            "宏大环境中的人物渺小感与前景框景",
+            "油画式笔触与粗糙度对比，悲壮留白"
+          ],
+          "prompt_additions": [
+            "Use the deco-chiaroscuro substyle: ornamental dark-and-gold material motifs (obsidian black, gilded edges, dark wood) over chiaroscuro lighting; carve character silhouettes out of mist with rim light, place small figures against monumental environments with foreground framing, and keep a painterly weathered-texture surface with elegiac restraint.",
+            "Avoid: flat ultra-realism, cheerful flat colors, cluttered full-frame ornament, subjects lost in darkness (keep the main subject readable against deep shadow).",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：黑金母题与逆光轮廓同时在场，人物在深暗部仍可读",
+            "未触发排除项：轻松日常、儿童、搞笑题材。"
+          ],
+          "sources": [
+            "S51"
+          ]
+        }
+      ],
+      "balloon_style": {
+        "fill_strategy": "classic",
+        "cloud_lobe_scale": 0.24,
+        "burst_spikes": 12,
+        "burst_amplitude": 0.1,
+        "outline_scale": 1.0,
+        "speech_jitter": 0.0
+      }
+    },
+    "editorial": {
+      "display_name": "成人编辑漫画 / Editorial — 象征性观点插画",
+      "short_name": "Adult Symbolic Editorial Cartoon",
+      "taxonomy": {
+        "tradition": "adult editorial cartoon and illustration",
+        "format": "single-panel or short sequence",
+        "medium": "economical ink + limited color",
+        "note": "使用通用编辑漫画语言，不要求模仿某一具体刊物或画家。"
+      },
+      "selection": {
+        "best_for": [
+          "认知和哲学",
+          "社会科学",
+          "商业观点",
+          "成人幽默",
+          "抽象概念",
+          "一图一喻"
+        ],
+        "avoid_for": [
+          "需要复杂动作连续性或奇幻世界大场面的章节"
+        ],
+        "variants": [
+          "political-satire",
+          "symbolic-minimal",
+          "dry-gag",
+          "conceptual-texture",
+          "literary-graphic-essay",
+          "infographic-explainer",
+          "surreal-metaphor"
+        ],
+        "platforms": [
+          "card",
+          "article",
+          "page",
+          "cover"
+        ]
+      },
+      "art_direction": {
+        "realism": 0.43,
+        "anatomy": "普通成人比例，可有轻微夸张；姿态和手势比肌肉细节重要。",
+        "face": "经济线条、少量特征即可识别；讽刺时夸张必须服务观点而非羞辱身份。",
+        "shape_language": "每格围绕一个主要视觉隐喻；形状关系简明，负空间参与表达。",
+        "line": "自信、经济、略带手工感；线条不追求机械完美，也不能变成潦草未完成。",
+        "ink_value": "以留白和少量实线为主；必要时用局部黑块或浅洗染强调。",
+        "color": "2–5 个低饱和色；单一强调色负责概念焦点。",
+        "lighting": "不追求电影写实；用局部投影或色块说明空间即可。",
+        "texture": "轻纸纹、浅洗染、有限铅笔或墨水纹理。",
+        "character": "角色是观点载体但仍要有生活感；职业、姿态和道具提供社会语境。",
+        "environment": "仅保留理解隐喻所需的场景信息；避免装饰性背景抢夺概念。",
+        "props": "道具经常承担隐喻，必须轮廓明确、比例合理、语义单一。",
+        "camera": "正面、侧面或轻微俯视为主；构图像一句精确论证，不追求过度动态。",
+        "paneling": "单格或短序列；每格一个命题；跨格通过同一隐喻递进。",
+        "lettering": "标题、旁白和对话后期完成；文字短、锋利；不让画面依赖大段解释。"
+      },
+      "prompt_blocks": {
+        "style_core": [
+          "finished adult editorial cartoon illustration",
+          "economical confident hand-drawn linework",
+          "one strong visual metaphor",
+          "limited muted palette and generous negative space",
+          "sophisticated, dry and concept-first"
+        ],
+        "character": [
+          "ordinary adult proportions and observant body language",
+          "specific social role conveyed through posture, clothing and one or two props"
+        ],
+        "environment": [
+          "only the environmental information required to understand the metaphor",
+          "clean negative space and uncluttered hierarchy"
+        ],
+        "camera": [
+          "simple readable composition like a precise visual argument",
+          "single focal metaphor"
+        ],
+        "avoid": [
+          "generic corporate clip-art",
+          "cute mascot style",
+          "over-rendered 3D",
+          "multiple competing metaphors",
+          "visual noise",
+          "direct imitation of a named living artist",
+          "embedded text"
+        ]
+      },
+      "qa": {
+        "signature": [
+          "一格一喻",
+          "线条经济",
+          "负空间有效",
+          "色彩克制",
+          "观点在无文字时仍基本可读"
+        ],
+        "hard_fail": [
+          "堆砌多个隐喻",
+          "变成儿童插画",
+          "变成扁平企业图库",
+          "过度渲染",
+          "没有清楚观点焦点"
+        ]
+      },
+      "sources": [
+        "S18",
+        "S19",
+        "S16",
+        "S05"
+      ],
+      "substyles": [
+        {
+          "id": "political-satire",
+          "label": "政治/社会讽刺",
+          "use_when": "权力、制度、公共议题和社会矛盾的观点表达。",
+          "avoid_when": "中性产品说明或亲子治愈内容。",
+          "visual_traits": [
+            "一格一个权力隐喻",
+            "道具符号明确",
+            "夸张服务观点"
+          ],
+          "prompt_additions": [
+            "Use the political-satire substyle: political editorial cartooning with one sharp symbolic conflict and economical linework.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：一格一个权力隐喻",
+            "未触发排除项：中性产品说明或亲子治愈内容。"
+          ],
+          "sources": [
+            "S16",
+            "S38",
+            "S40"
+          ]
+        },
+        {
+          "id": "symbolic-minimal",
+          "label": "极简象征",
+          "use_when": "哲学、商业观点、心理模型和抽象概念。",
+          "avoid_when": "需要场景细节、动作连续性或奇观世界观。",
+          "visual_traits": [
+            "负空间大",
+            "符号少而准",
+            "单一焦点"
+          ],
+          "prompt_additions": [
+            "Use the symbolic-minimal substyle: minimal symbolic editorial illustration with generous negative space and a single visual metaphor.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：负空间大",
+            "未触发排除项：需要场景细节、动作连续性或奇观世界观。"
+          ],
+          "sources": [
+            "S18",
+            "S19"
+          ]
+        },
+        {
+          "id": "dry-gag",
+          "label": "冷幽默单格",
+          "use_when": "成人幽默、反常识、轻讽刺和一图反转。",
+          "avoid_when": "悲剧高潮或严肃纪实段落。",
+          "visual_traits": [
+            "表情克制",
+            "构图像一句话",
+            "反转依靠视觉关系"
+          ],
+          "prompt_additions": [
+            "Use the dry-gag substyle: dry single-panel gag with understated acting and a clean punchline image.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：表情克制",
+            "未触发排除项：悲剧高潮或严肃纪实段落。"
+          ],
+          "sources": [
+            "S18",
+            "S40"
+          ]
+        },
+        {
+          "id": "conceptual-texture",
+          "label": "概念质感插画",
+          "use_when": "书评、长文配图、抽象主题和成熟出版物调性。",
+          "avoid_when": "高频连载动作或儿童卡通。",
+          "visual_traits": [
+            "纸纹和浅洗染",
+            "线条手工感",
+            "色彩低饱和"
+          ],
+          "prompt_additions": [
+            "Use the conceptual-texture substyle: conceptual editorial illustration with muted texture, hand-drawn line, and restrained accents.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：纸纹和浅洗染",
+            "未触发排除项：高频连载动作或儿童卡通。"
+          ],
+          "sources": [
+            "S19",
+            "S16"
+          ]
+        },
+        {
+          "id": "literary-graphic-essay",
+          "label": "文学图像随笔",
+          "use_when": "散文、回忆、哲学和需要慢读的成人叙事。",
+          "avoid_when": "强钩子封面或爆炸式商业广告。",
+          "visual_traits": [
+            "图像与旁白留区",
+            "象征空间",
+            "节奏安静"
+          ],
+          "prompt_additions": [
+            "Use the literary-graphic-essay substyle: literary graphic-essay tone with calm symbolic staging and reserved lettering space.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：图像与旁白留区",
+            "未触发排除项：强钩子封面或爆炸式商业广告。"
+          ],
+          "sources": [
+            "S16",
+            "S21"
+          ]
+        },
+        {
+          "id": "infographic-explainer",
+          "label": "图解观点漫画",
+          "use_when": "概念解释、商业框架、方法论和轻量知识。",
+          "avoid_when": "需要沉浸式剧情或复杂人物弧光。",
+          "visual_traits": [
+            "人物道具化但不图库化",
+            "结构图像清楚",
+            "留出标注位置"
+          ],
+          "prompt_additions": [
+            "Use the infographic-explainer substyle: editorial explainer cartoon with diagram-like clarity, simple characters, and reserved label zones.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：人物道具化但不图库化",
+            "未触发排除项：需要沉浸式剧情或复杂人物弧光。"
+          ],
+          "sources": [
+            "S05",
+            "S16"
+          ]
+        },
+        {
+          "id": "surreal-metaphor",
+          "label": "超现实隐喻",
+          "use_when": "梦境、心理困境、荒诞社会观察和复杂内心。",
+          "avoid_when": "实用教程或必须完全写实的说明。",
+          "visual_traits": [
+            "现实物体比例被概念化",
+            "空间逻辑服务隐喻",
+            "色彩克制"
+          ],
+          "prompt_additions": [
+            "Use the surreal-metaphor substyle: surreal editorial metaphor with ordinary objects transformed into a clear conceptual scene.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：现实物体比例被概念化",
+            "未触发排除项：实用教程或必须完全写实的说明。"
+          ],
+          "sources": [
+            "S19",
+            "S38"
+          ]
+        }
+      ],
+      "balloon_style": {
+        "fill_strategy": "classic",
+        "cloud_lobe_scale": 0.24,
+        "burst_spikes": 12,
+        "burst_amplitude": 0.09,
+        "outline_scale": 0.9,
+        "speech_jitter": 0.0
+      }
+    },
+    "comic-strip": {
+      "display_name": "报纸连环漫画 / Comic Strip — 短节奏幽默",
+      "short_name": "Newspaper Gag Strip",
+      "taxonomy": {
+        "tradition": "newspaper comic strip",
+        "format": "3–6 beat horizontal or card sequence",
+        "medium": "clean outline + limited color or B&W",
+        "note": "重点是节奏与角色关系，不是单纯简笔画。"
+      },
+      "selection": {
+        "best_for": [
+          "轻知识",
+          "日常解释",
+          "角色反差",
+          "反转",
+          "短幽默",
+          "固定场景对话"
+        ],
+        "avoid_for": [
+          "宏大世界观、强写实战争、依赖复杂材质和氛围的内容"
+        ],
+        "variants": [
+          "gag-a-day",
+          "daily-bw",
+          "sunday-color",
+          "continuity-story",
+          "warm-color-slice-of-life",
+          "satirical-strip",
+          "single-panel-gag"
+        ],
+        "platforms": [
+          "strip",
+          "card",
+          "social",
+          "article"
+        ]
+      },
+      "art_direction": {
+        "realism": 0.35,
+        "anatomy": "简化但不是火柴人；手脚、姿态和动作必须明确。",
+        "face": "少量稳定特征和大幅可读表情；角色之间通过头型、鼻型、发型和体块区分。",
+        "shape_language": "图形清楚、重复性高；角色和道具能在小尺寸快速识别。",
+        "line": "清洁黑色轮廓，粗细适中；内部细节少；必要时用局部抖动增加手工感。",
+        "ink_value": "大面积白底或浅色；黑块只用于头发、服装或节奏强调。",
+        "color": "轻量平涂，角色色固定；背景色简洁。",
+        "lighting": "通常简化；只保留帮助时间、天气或情绪的信息。",
+        "texture": "极少；不能用纹理掩盖表演。",
+        "character": "固定角色组合和关系是核心；表演在小格中一眼可读。",
+        "environment": "固定场景保持机位和道具位置，便于读者迅速进入情境。",
+        "props": "少而准；反复出现的道具承担笑点、习惯和身份。",
+        "camera": "以中景和双人镜头为主，关键反应给近景；最后一格可用反应镜头收束。",
+        "paneling": "setup → development → turn → reaction；每格变化明确，不能四格都只是站着说话。",
+        "lettering": "气泡短，阅读顺序绝对清楚；最后一格台词或视觉反应承担 punchline。"
+      },
+      "prompt_blocks": {
+        "style_core": [
+          "finished classic newspaper comic-strip panel",
+          "simple but professionally designed characters",
+          "clean readable black outlines",
+          "light flat colors and uncluttered staging",
+          "clear gag timing and warm everyday observation"
+        ],
+        "character": [
+          "distinct silhouettes and repeatable facial features",
+          "expressive hands, posture and reaction without stick-figure anatomy"
+        ],
+        "environment": [
+          "consistent recurring location with only essential background objects",
+          "small-panel readability"
+        ],
+        "camera": [
+          "clear setup, change and reaction",
+          "one readable action per panel"
+        ],
+        "avoid": [
+          "stick figures",
+          "random icon people",
+          "detailed cinematic painting",
+          "crowded background",
+          "identical pose every panel",
+          "unresolved gag",
+          "embedded text"
+        ]
+      },
+      "qa": {
+        "signature": [
+          "小尺寸可读",
+          "角色反差稳定",
+          "每格有变化",
+          "最后一格有落点",
+          "背景不抢戏"
+        ],
+        "hard_fail": [
+          "火柴人",
+          "四格重复同姿势",
+          "笑点只能靠大段旁白解释",
+          "人物无法区分",
+          "场景每格变化"
+        ]
+      },
+      "sources": [
+        "S16",
+        "S17",
+        "S05"
+      ],
+      "substyles": [
+        {
+          "id": "gag-a-day",
+          "label": "每日一梗",
+          "use_when": "短反转、固定角色和一屏完成的轻幽默。",
+          "avoid_when": "长篇连续剧情或复杂设定揭示。",
+          "visual_traits": [
+            "起承转合短",
+            "最后一格 punchline",
+            "角色关系稳定"
+          ],
+          "prompt_additions": [
+            "Use the gag-a-day substyle: gag-a-day strip rhythm with clear setup, turn, and reaction in compact panels.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：起承转合短",
+            "未触发排除项：长篇连续剧情或复杂设定揭示。"
+          ],
+          "sources": [
+            "S17",
+            "S41"
+          ]
+        },
+        {
+          "id": "daily-bw",
+          "label": "黑白日报条漫",
+          "use_when": "低成本、清晰、可连续发布的日常观察。",
+          "avoid_when": "需要高精修全彩或复杂环境写实。",
+          "visual_traits": [
+            "黑白线条清楚",
+            "背景最小化",
+            "表演一眼可读"
+          ],
+          "prompt_additions": [
+            "Use the daily-bw substyle: black-and-white daily newspaper-strip clarity with simple settings and strong acting.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：黑白线条清楚",
+            "未触发排除项：需要高精修全彩或复杂环境写实。"
+          ],
+          "sources": [
+            "S16",
+            "S17",
+            "S42"
+          ]
+        },
+        {
+          "id": "sunday-color",
+          "label": "周日彩色连环",
+          "use_when": "更完整的小故事、彩色轻冒险和更大版面。",
+          "avoid_when": "单格观点漫画或纵向韩漫格式。",
+          "visual_traits": [
+            "色彩明快",
+            "格子变化更多",
+            "场景稍丰富"
+          ],
+          "prompt_additions": [
+            "Use the sunday-color substyle: Sunday color strip energy with larger beats, bright flat color, and readable multi-panel staging.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：色彩明快",
+            "未触发排除项：单格观点漫画或纵向韩漫格式。"
+          ],
+          "sources": [
+            "S17",
+            "S42"
+          ]
+        },
+        {
+          "id": "continuity-story",
+          "label": "连续剧情条漫",
+          "use_when": "连载悬念、轻冒险、人物关系逐步推进。",
+          "avoid_when": "只需要一句话笑点的极短内容。",
+          "visual_traits": [
+            "每期有小钩子",
+            "角色状态延续",
+            "背景锚点稳定"
+          ],
+          "prompt_additions": [
+            "Use the continuity-story substyle: continuity comic-strip storytelling with recurring places, serial hooks, and compact story progress.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：每期有小钩子",
+            "未触发排除项：只需要一句话笑点的极短内容。"
+          ],
+          "sources": [
+            "S16",
+            "S17",
+            "S43"
+          ]
+        },
+        {
+          "id": "warm-color-slice-of-life",
+          "label": "温暖日常彩条",
+          "use_when": "生活方式、家庭、朋友、疗愈和轻观察。",
+          "avoid_when": "尖锐政治讽刺或黑暗惊悚。",
+          "visual_traits": [
+            "暖色平涂",
+            "动作轻",
+            "空间熟悉"
+          ],
+          "prompt_additions": [
+            "Use the warm-color-slice-of-life substyle: warm slice-of-life strip with stable character colors and everyday visual rhythm.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：暖色平涂",
+            "未触发排除项：尖锐政治讽刺或黑暗惊悚。"
+          ],
+          "sources": [
+            "S17",
+            "S42"
+          ]
+        },
+        {
+          "id": "satirical-strip",
+          "label": "讽刺条漫",
+          "use_when": "社会观察、职业吐槽和轻政治/文化讽刺。",
+          "avoid_when": "纯治愈或高幻想史诗。",
+          "visual_traits": [
+            "对比关系清楚",
+            "人物夸张克制",
+            "结尾有刺点"
+          ],
+          "prompt_additions": [
+            "Use the satirical-strip substyle: satirical strip with clear character contrast, economical staging, and a final critical turn.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：对比关系清楚",
+            "未触发排除项：纯治愈或高幻想史诗。"
+          ],
+          "sources": [
+            "S16",
+            "S38",
+            "S41"
+          ]
+        },
+        {
+          "id": "single-panel-gag",
+          "label": "单格笑点漫画",
+          "use_when": "一句视觉笑话、海报卡片或社媒轻幽默。",
+          "avoid_when": "需要连续动作分解或复杂时间推进。",
+          "visual_traits": [
+            "一格完成语义",
+            "构图留白",
+            "笑点视觉化"
+          ],
+          "prompt_additions": [
+            "Use the single-panel-gag substyle: single-panel gag cartoon with one readable comedic situation and clean negative space.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：一格完成语义",
+            "未触发排除项：需要连续动作分解或复杂时间推进。"
+          ],
+          "sources": [
+            "S40",
+            "S18"
+          ]
+        }
+      ],
+      "balloon_style": {
+        "fill_strategy": "classic",
+        "cloud_lobe_scale": 0.28,
+        "burst_spikes": 14,
+        "burst_amplitude": 0.12,
+        "outline_scale": 1.0,
+        "speech_jitter": 0.015
+      }
+    },
+    "doodle": {
+      "display_name": "手绘 Doodle — 受控的不完美笔记漫画",
+      "short_name": "Controlled Hand-Drawn Doodle",
+      "taxonomy": {
+        "tradition": "notebook doodle and hand-drawn visual notes",
+        "format": "card, note-comic, short sequence",
+        "medium": "loose pen + flat accent",
+        "note": "Doodle 的目标是有意的松弛和人味，不是低水平、火柴人或未完成草稿。"
+      },
+      "selection": {
+        "best_for": [
+          "生活方式",
+          "心理与自我成长",
+          "读书笔记",
+          "亲切解释",
+          "小红书",
+          "轻量人物故事"
+        ],
+        "avoid_for": [
+          "需要写实战争、宏大历史空间、复杂动作和高端产品精确展示"
+        ],
+        "variants": [
+          "sketchnote-visual-notes",
+          "notebook-warm",
+          "marker-color",
+          "annotated-knowledge",
+          "diary-comic",
+          "whiteboard-explainer",
+          "zine-diy"
+        ],
+        "platforms": [
+          "card",
+          "social",
+          "notes",
+          "article"
+        ]
+      },
+      "art_direction": {
+        "realism": 0.25,
+        "anatomy": "简化但完整；头、躯干、四肢和手势需要结构，不允许线条火柴人。",
+        "face": "极简五官但角色差异清楚；表情依赖眉、眼、口和头部倾斜。",
+        "shape_language": "圆润、亲和、符号化；形状可不规则但必须一致。",
+        "line": "自由手绘、轻微抖动、粗细和收笔变化；重复元素相似但不机械复制。",
+        "ink_value": "大量留白；少量黑色或深色强调；不做均匀灰雾。",
+        "color": "1–4 个柔和或明快强调色；允许轻微出线和马克笔叠色。",
+        "lighting": "通常不做复杂写实光影；用简单投影、色块或纹理说明层次。",
+        "texture": "纸张、铅笔、钢笔、马克笔触感；纹理要轻，文字区域保持清楚。",
+        "character": "轮廓和服装符号重复稳定；情绪真实亲近，不默认儿童。",
+        "environment": "用少量家具、植物、窗、桌面和图标提示地点；保持视觉呼吸。",
+        "props": "以轮廓和一两个识别细节说明；可配箭头、星号、圈线等视觉注记，但文字后期添加。",
+        "camera": "正面、中景、俯视桌面和小特写组合；构图像精心整理的手账而非随机涂鸦。",
+        "paneling": "卡片或松散格；可用手画边框，但阅读顺序明确。",
+        "lettering": "可使用手写感字体和手绘容器，但正文必须后期排版，保证可读性。"
+      },
+      "prompt_blocks": {
+        "style_core": [
+          "finished controlled hand-drawn doodle comic illustration",
+          "organic variable pen lines and intentional imperfections",
+          "simple complete character anatomy, not stick figures",
+          "warm notebook texture with a few flat color accents",
+          "clear visual hierarchy and human charm"
+        ],
+        "character": [
+          "recognizable silhouette, stable clothing symbols and expressive posture",
+          "minimal facial marks but distinct identity"
+        ],
+        "environment": [
+          "sparse but meaningful everyday objects",
+          "generous breathing room and balanced clusters"
+        ],
+        "camera": [
+          "friendly close or medium composition",
+          "organized visual-note rhythm rather than random scribbles"
+        ],
+        "avoid": [
+          "stick figures",
+          "childlike crayon art",
+          "illegible messy scribbles",
+          "generic vector icons",
+          "mechanically perfect line",
+          "fake handwriting or embedded pseudo-text"
+        ]
+      },
+      "qa": {
+        "signature": [
+          "线条有手感",
+          "简化但完整的人体",
+          "留白充足",
+          "色彩少而准",
+          "亲切而非幼稚"
+        ],
+        "hard_fail": [
+          "火柴人",
+          "杂乱不可读",
+          "像低清草稿",
+          "所有角色只是圆头线身",
+          "文字伪影",
+          "机械矢量图标感"
+        ]
+      },
+      "sources": [
+        "S19",
+        "S05",
+        "S07",
+        "S08"
+      ],
+      "substyles": [
+        {
+          "id": "sketchnote-visual-notes",
+          "label": "视觉笔记",
+          "use_when": "读书笔记、知识拆解、课程总结和概念地图。",
+          "avoid_when": "沉浸式剧情漫画或写实产品展示。",
+          "visual_traits": [
+            "图标与人物混排",
+            "箭头和容器后期可加",
+            "信息层级清楚"
+          ],
+          "prompt_additions": [
+            "Use the sketchnote-visual-notes substyle: sketchnote-style visual notes with organized clusters, simple icons, and generous text-safe zones.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：图标与人物混排",
+            "未触发排除项：沉浸式剧情漫画或写实产品展示。"
+          ],
+          "sources": [
+            "S44",
+            "S45",
+            "S19"
+          ]
+        },
+        {
+          "id": "notebook-warm",
+          "label": "暖手账",
+          "use_when": "生活方式、自我成长、温柔叙事和轻社媒卡片。",
+          "avoid_when": "严肃政治讽刺或硬核技术图。",
+          "visual_traits": [
+            "纸张质感",
+            "柔和色块",
+            "手绘但整洁"
+          ],
+          "prompt_additions": [
+            "Use the notebook-warm substyle: warm notebook doodle with organic pen lines, soft accents, and tidy human-scale charm.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：纸张质感",
+            "未触发排除项：严肃政治讽刺或硬核技术图。"
+          ],
+          "sources": [
+            "S19",
+            "S07",
+            "S08"
+          ]
+        },
+        {
+          "id": "marker-color",
+          "label": "马克笔彩绘",
+          "use_when": "轻快教程、生活清单、亲切知识和小红书风格。",
+          "avoid_when": "黑白文学、暗黑悬疑或复古半调。",
+          "visual_traits": [
+            "轻微出线",
+            "叠色痕迹",
+            "块面简单"
+          ],
+          "prompt_additions": [
+            "Use the marker-color substyle: marker-colored doodle with slight imperfect fills, layered accents, and readable silhouettes.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：轻微出线",
+            "未触发排除项：黑白文学、暗黑悬疑或复古半调。"
+          ],
+          "sources": [
+            "S09",
+            "S19"
+          ]
+        },
+        {
+          "id": "annotated-knowledge",
+          "label": "注释知识漫画",
+          "use_when": "需要图解、箭头、圈画和步骤说明的内容。",
+          "avoid_when": "无文字沉浸剧情或高美术封面。",
+          "visual_traits": [
+            "图像留出标注区",
+            "关系线清楚",
+            "符号不乱"
+          ],
+          "prompt_additions": [
+            "Use the annotated-knowledge substyle: annotated knowledge doodle with clear callout zones and visual hierarchy for later lettering.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：图像留出标注区",
+            "未触发排除项：无文字沉浸剧情或高美术封面。"
+          ],
+          "sources": [
+            "S05",
+            "S44",
+            "S45"
+          ]
+        },
+        {
+          "id": "diary-comic",
+          "label": "日记漫画",
+          "use_when": "个人经历、情绪记录、成长故事和真实小场景。",
+          "avoid_when": "宏大历史、复杂多人动作或精密机械。",
+          "visual_traits": [
+            "第一人称亲近",
+            "小表情丰富",
+            "场景生活化"
+          ],
+          "prompt_additions": [
+            "Use the diary-comic substyle: diary-comic doodle with intimate everyday staging and expressive small gestures.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：第一人称亲近",
+            "未触发排除项：宏大历史、复杂多人动作或精密机械。"
+          ],
+          "sources": [
+            "S19",
+            "S17"
+          ]
+        },
+        {
+          "id": "whiteboard-explainer",
+          "label": "白板解释",
+          "use_when": "商业概念、方法论、流程、轻培训和框架讲解。",
+          "avoid_when": "需要精细材质、复杂光影或写实脸。",
+          "visual_traits": [
+            "白底高可读",
+            "线条简洁",
+            "图标结构化"
+          ],
+          "prompt_additions": [
+            "Use the whiteboard-explainer substyle: whiteboard explainer doodle with clean black lines, modular icons, and post-production label space.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：白底高可读",
+            "未触发排除项：需要精细材质、复杂光影或写实脸。"
+          ],
+          "sources": [
+            "S05",
+            "S44"
+          ]
+        },
+        {
+          "id": "zine-diy",
+          "label": "独立小志 DIY",
+          "use_when": "粗粝个人表达、低保真文化、观点型手作感。",
+          "avoid_when": "高端品牌展示或精修偶像人物。",
+          "visual_traits": [
+            "拼贴边缘",
+            "不完美线条",
+            "手作但可读"
+          ],
+          "prompt_additions": [
+            "Use the zine-diy substyle: DIY zine doodle energy with handmade texture, imperfect borders, and controlled legibility.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：拼贴边缘",
+            "未触发排除项：高端品牌展示或精修偶像人物。"
+          ],
+          "sources": [
+            "S16",
+            "S19"
+          ]
+        }
+      ],
+      "balloon_style": {
+        "fill_strategy": "classic",
+        "cloud_lobe_scale": 0.34,
+        "burst_spikes": 16,
+        "burst_amplitude": 0.14,
+        "outline_scale": 1.1,
+        "speech_jitter": 0.03
+      }
+    },
+    "retro-halftone": {
+      "display_name": "复古半调漫画 / Retro Halftone — 美式印刷冲击力",
+      "short_name": "American Retro Print Comic",
+      "taxonomy": {
+        "tradition": "American pulp / romance / horror / pop-print comic language",
+        "format": "page, cover, impact card",
+        "medium": "bold ink + limited print palette + Ben-Day/halftone texture",
+        "note": "半调是印刷与明暗技术；本预设用完整的复古印刷系统承载它。"
+      },
+      "selection": {
+        "best_for": [
+          "封面",
+          "强钩子",
+          "观点对抗",
+          "戏剧冲突",
+          "讽刺",
+          "复古主题",
+          "高能转折"
+        ],
+        "avoid_for": [
+          "需要安静微妙、长篇自然主义表演的章节"
+        ],
+        "variants": [
+          "benday-pop-print",
+          "american-golden-pulp",
+          "retro-romance-horror",
+          "pop-poster",
+          "noir-pulp-cover",
+          "war-propaganda-print",
+          "cmyk-misregister"
+        ],
+        "platforms": [
+          "cover",
+          "card",
+          "page",
+          "poster"
+        ]
+      },
+      "art_direction": {
+        "realism": 0.62,
+        "anatomy": "结构可信、轮廓有力量；可适度夸张姿态和表情，但避免廉价超级英雄 Cosplay。",
+        "face": "强眉眼、清楚鼻口、戏剧性表情；保留年龄和个体特征。",
+        "shape_language": "对角线、爆发形、强轮廓和前后层次；大形优先。",
+        "line": "粗重刷墨轮廓、局部细线和少量排线；黑块分布明确。",
+        "ink_value": "高对比；纸白、实黑、网点中间调；网点密度随体积和焦点变化。",
+        "color": "有限 CMYK 感色板，通常 3–6 色；高饱和但不使用全光谱霓虹。",
+        "lighting": "硬边戏剧光、轮廓光、舞台式强调；投影形状图形化。",
+        "texture": "Ben-Day dots、纸张颗粒、轻微套色偏移和印刷磨损；不能覆盖眼睛、嘴和关键手势。",
+        "character": "姿态有冲击力；服装和道具时代一致；角色不是默认超级英雄。",
+        "environment": "背景可简化成图形化城市、室内或爆发形，但必须提供故事语境。",
+        "props": "轮廓大、材质清楚、年代准确；关键道具可作为前景放大。",
+        "camera": "低机位、斜角、极近特写和强透视可增加冲击；仍需控制畸变。",
+        "paneling": "重点格可越框或使用爆发边形；普通格保持阅读秩序。",
+        "lettering": "后期使用粗体标题、爆发气泡和拟声词；文字不能由图像模型生成。"
+      },
+      "prompt_blocks": {
+        "style_core": [
+          "finished American retro printed comic panel",
+          "bold brush-ink outlines and deliberate spotted blacks",
+          "limited punchy CMYK-like palette",
+          "selective Ben-Day halftone shading and subtle aged paper grain",
+          "dramatic graphic composition with period-print impact"
+        ],
+        "character": [
+          "grounded anatomy with controlled dramatic exaggeration",
+          "distinct face, age, clothing and role, not generic superhero cosplay"
+        ],
+        "environment": [
+          "graphic but story-specific setting",
+          "clear period objects and readable silhouette layers"
+        ],
+        "camera": [
+          "dynamic diagonal or low-angle composition with one dominant action",
+          "controlled foreshortening"
+        ],
+        "avoid": [
+          "modern glossy 3D",
+          "halftone dots uniformly covering every surface",
+          "rainbow palette",
+          "generic superhero costume",
+          "perfect digital gradients",
+          "embedded text"
+        ]
+      },
+      "qa": {
+        "signature": [
+          "有限色",
+          "实黑有设计",
+          "网点有密度变化",
+          "印刷质感轻而可信",
+          "构图冲击力强"
+        ],
+        "hard_fail": [
+          "只加网点滤镜",
+          "所有脸被点阵破坏",
+          "色彩超过控制范围",
+          "变成现代 3D 海报",
+          "角色默认超级英雄",
+          "套色偏移过重"
+        ]
+      },
+      "sources": [
+        "S20",
+        "S16",
+        "S06"
+      ],
+      "substyles": [
+        {
+          "id": "benday-pop-print",
+          "label": "Ben-Day 波普印刷",
+          "use_when": "强观点、封面、社媒钩子和流行艺术式冲击。",
+          "avoid_when": "安静文学、写实水彩或无印刷质感内容。",
+          "visual_traits": [
+            "Ben-Day 点阵随明暗变化",
+            "色块高对比",
+            "套色偏移轻"
+          ],
+          "prompt_additions": [
+            "Use the benday-pop-print substyle: Ben-Day pop-print comic with selective dot shading, bold color blocks, and light registration offset.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：Ben-Day 点阵随明暗变化",
+            "未触发排除项：安静文学、写实水彩或无印刷质感内容。"
+          ],
+          "sources": [
+            "S20",
+            "S46"
+          ]
+        },
+        {
+          "id": "american-golden-pulp",
+          "label": "黄金时代通俗漫画",
+          "use_when": "冒险、危机、强冲突、戏剧封面和复古故事。",
+          "avoid_when": "低调社科解释或温柔手账。",
+          "visual_traits": [
+            "粗墨线",
+            "强透视",
+            "有限印刷色"
+          ],
+          "prompt_additions": [
+            "Use the american-golden-pulp substyle: Golden Age pulp comic impact with bold inks, dramatic angles, and limited print-era palette.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：粗墨线",
+            "未触发排除项：低调社科解释或温柔手账。"
+          ],
+          "sources": [
+            "S16",
+            "S47"
+          ]
+        },
+        {
+          "id": "retro-romance-horror",
+          "label": "复古爱情/恐怖",
+          "use_when": "情绪爆发、禁忌关系、悬疑、惊叫和强反差。",
+          "avoid_when": "日常治愈或中性信息图。",
+          "visual_traits": [
+            "脸部戏剧光",
+            "浓烈局部色",
+            "阴影图形化"
+          ],
+          "prompt_additions": [
+            "Use the retro-romance-horror substyle: retro romance or horror comic mood with dramatic faces, hard-edged shadows, and controlled halftone.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：脸部戏剧光",
+            "未触发排除项：日常治愈或中性信息图。"
+          ],
+          "sources": [
+            "S16",
+            "S47"
+          ]
+        },
+        {
+          "id": "pop-poster",
+          "label": "波普海报漫画",
+          "use_when": "单张封面、活动图、强 slogan 预留和视觉钩子。",
+          "avoid_when": "长篇多格自然主义表演。",
+          "visual_traits": [
+            "大形简洁",
+            "背景图形化",
+            "焦点极强"
+          ],
+          "prompt_additions": [
+            "Use the pop-poster substyle: pop-comic poster composition with one dominant figure, graphic background shapes, and text-safe space.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：大形简洁",
+            "未触发排除项：长篇多格自然主义表演。"
+          ],
+          "sources": [
+            "S20",
+            "S46"
+          ]
+        },
+        {
+          "id": "noir-pulp-cover",
+          "label": "黑色通俗封面",
+          "use_when": "犯罪、秘密、道德困境、夜景和强对比封面。",
+          "avoid_when": "明亮亲和知识解释或 Q 版幽默。",
+          "visual_traits": [
+            "低调硬光",
+            "大片实黑",
+            "有限红黄蓝点缀"
+          ],
+          "prompt_additions": [
+            "Use the noir-pulp-cover substyle: noir pulp cover mood with hard light, deep spotted blacks, and restrained period color.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：低调硬光",
+            "未触发排除项：明亮亲和知识解释或 Q 版幽默。"
+          ],
+          "sources": [
+            "S16",
+            "S47"
+          ]
+        },
+        {
+          "id": "war-propaganda-print",
+          "label": "战争/宣传印刷",
+          "use_when": "强动员感、历史冲突、群体动作和海报式构图。",
+          "avoid_when": "私人日记、细腻恋爱或柔和心理内容。",
+          "visual_traits": [
+            "斜向构图",
+            "硬边色块",
+            "人物姿态有号召感"
+          ],
+          "prompt_additions": [
+            "Use the war-propaganda-print substyle: wartime print-comic energy with diagonal composition, hard color fields, and period poster force.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：斜向构图",
+            "未触发排除项：私人日记、细腻恋爱或柔和心理内容。"
+          ],
+          "sources": [
+            "S16",
+            "S47"
+          ]
+        },
+        {
+          "id": "cmyk-misregister",
+          "label": "CMYK 套色偏移",
+          "use_when": "强调复古印刷物质感、旧杂志或廉价漫画质感。",
+          "avoid_when": "需要干净现代 UI 风或精确品牌色。",
+          "visual_traits": [
+            "轻微套色错位",
+            "纸张磨损",
+            "细节仍可读"
+          ],
+          "prompt_additions": [
+            "Use the cmyk-misregister substyle: controlled CMYK misregistration and aged paper texture without damaging faces or hands.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：轻微套色错位",
+            "未触发排除项：需要干净现代 UI 风或精确品牌色。"
+          ],
+          "sources": [
+            "S20",
+            "S46",
+            "S47"
+          ]
+        },
+        {
+          "id": "print-hybrid-kinetic",
+          "label": "错版印刷动能",
+          "use_when": "青少年冒险、都市奇幻、科幻动作与高能量成长叙事，需要爆款级视觉冲击时。",
+          "avoid_when": "古典文学、抒情散文、纪实传记与慢节奏哲思文本。",
+          "visual_traits": [
+            "CG体积感与二维漫画语法混合",
+            "半调网点+错版色偏移的印刷质感",
+            "厚外轮廓、少内线、主体局部饱和峰值",
+            "大透视对角线与表现性运动线"
+          ],
+          "prompt_additions": [
+            "Use the print-hybrid-kinetic substyle: hybrid comic-book cinematic frame with bold graphic shapes, halftone dot shading, subtle offset-print color misregistration kept away from faces, thick outer contours with sparse interior lines, dynamic exaggerated perspective and expressive motion lines; keep saturation peaks on the main subject and calmer backgrounds.",
+            "Avoid: plastic 3D render, flat cel shading, muddy colors, random full-frame chromatic aberration, noisy unreadable backgrounds.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：半调网点与错版偏移在动作边缘、五官区域禁用，主体饱和高于背景",
+            "未触发排除项：古典文学、抒情散文、慢节奏文本。"
+          ],
+          "sources": [
+            "S50"
+          ]
+        }
+      ],
+      "balloon_style": {
+        "fill_strategy": "classic",
+        "cloud_lobe_scale": 0.26,
+        "burst_spikes": 22,
+        "burst_amplitude": 0.19,
+        "outline_scale": 1.25,
+        "speech_jitter": 0.0
+      }
+    },
+    "ink-sketch": {
+      "display_name": "黑白钢笔 / Ink Sketch — 文学性墨线与排线",
+      "short_name": "Literary Pen-and-Ink",
+      "taxonomy": {
+        "tradition": "pen-and-ink drawing and literary illustration",
+        "format": "page, card, editorial sequence",
+        "medium": "ink line + hatching + optional wash",
+        "note": "必须是完成的墨线作品，不是粗糙草图或灰色素描占位。"
+      },
+      "selection": {
+        "best_for": [
+          "文学",
+          "哲学",
+          "历史",
+          "严肃社科",
+          "回忆",
+          "心理和象征场景"
+        ],
+        "avoid_for": [
+          "高度依赖鲜艳品牌色或轻快偶像感的内容"
+        ],
+        "variants": [
+          "crosshatch-noir",
+          "literary-pen",
+          "fine-line-portrait",
+          "travel-journal",
+          "stipple-texture",
+          "woodcut-expression",
+          "ink-wash-muted"
+        ],
+        "platforms": [
+          "page",
+          "pdf",
+          "card",
+          "article"
+        ]
+      },
+      "art_direction": {
+        "realism": 0.72,
+        "anatomy": "自然可信，允许通过线条省略细节；面部和手部需准确。",
+        "face": "以轮廓、少量结构线和排线塑造年龄与情绪；避免过多细碎线破坏表情。",
+        "shape_language": "轮廓克制，黑白密度引导焦点；文学场景允许象征性空间。",
+        "line": "钢笔、蘸水笔或刷笔质感；线条有方向、压力和节奏；排线顺着体积和材质。",
+        "ink_value": "纸白、线性中间调、局部实黑；可用稀释墨水 wash 形成有限灰阶。",
+        "color": "默认黑白或暖黑/棕黑；可有单一低饱和强调色。",
+        "lighting": "明确光源；通过排线密度、实黑和留白塑造光。",
+        "texture": "纸纹、排线、交叉排线、点描和墨洗按材质分配；不能用同一排线覆盖所有物体。",
+        "character": "细微表情、手势和姿态；衣褶方向说明材料和动作。",
+        "environment": "透视准确；以线密度区分前中后景；远景简化，焦点区域细化。",
+        "props": "结构准确；木、金属、布、玻璃、纸通过不同线条和高光留白表达。",
+        "camera": "安静中景、道具特写、情绪近景和建立镜头交替；避免全篇一个正面机位。",
+        "paneling": "规则格或文学性开放边界；黑白密度在整页形成节奏。",
+        "lettering": "后期使用克制字体、开放旁白或细线气泡；文字区域保持纸白。"
+      },
+      "prompt_blocks": {
+        "style_core": [
+          "finished literary pen-and-ink comic illustration",
+          "confident expressive nib lines",
+          "directional hatching and selective cross-hatching that follows form",
+          "clear paper white, line-based midtones and controlled solid blacks",
+          "quiet adult graphic-novel mood"
+        ],
+        "character": [
+          "accurate adult anatomy, subtle expression and readable hands",
+          "preserve exact age, face structure, clothing and posture"
+        ],
+        "environment": [
+          "accurate perspective with density-based depth",
+          "detailed focal area and simplified distance"
+        ],
+        "camera": [
+          "restrained cinematic composition with a clear emotional or symbolic focal point",
+          "varied shot scale"
+        ],
+        "avoid": [
+          "unfinished pencil rough",
+          "uniform gray smudge",
+          "photoreal charcoal shading",
+          "same hatch pattern on skin, cloth, wood and metal",
+          "cute manga face",
+          "embedded text"
+        ]
+      },
+      "qa": {
+        "signature": [
+          "线条方向服从体积",
+          "黑白密度有层级",
+          "材质排线不同",
+          "作品完成而非草稿",
+          "留白有效"
+        ],
+        "hard_fail": [
+          "像未完成速写",
+          "排线噪声覆盖脸",
+          "材质无法区分",
+          "透视错误",
+          "灰色涂抹取代线性结构",
+          "所有格同一密度"
+        ]
+      },
+      "sources": [
+        "S21",
+        "S05",
+        "S09"
+      ],
+      "substyles": [
+        {
+          "id": "crosshatch-noir",
+          "label": "交叉排线黑色感",
+          "use_when": "黑暗心理、犯罪、沉重文学和高反差场景。",
+          "avoid_when": "轻快彩色条漫或可爱 Q 版。",
+          "visual_traits": [
+            "交叉排线顺体积",
+            "实黑压住焦点",
+            "脸部不过度噪声"
+          ],
+          "prompt_additions": [
+            "Use the crosshatch-noir substyle: noir cross-hatching with form-following strokes, deep blacks, and preserved facial readability.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：交叉排线顺体积",
+            "未触发排除项：轻快彩色条漫或可爱 Q 版。"
+          ],
+          "sources": [
+            "S21",
+            "S48",
+            "S49"
+          ]
+        },
+        {
+          "id": "literary-pen",
+          "label": "文学钢笔线描",
+          "use_when": "小说、散文、哲学、历史回忆和成人图像小说。",
+          "avoid_when": "商业波普封面或高彩韩漫。",
+          "visual_traits": [
+            "钢笔线节奏",
+            "留白和密度交替",
+            "表情细微"
+          ],
+          "prompt_additions": [
+            "Use the literary-pen substyle: literary pen-and-ink illustration with confident nib lines, quiet density rhythm, and subtle acting.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：钢笔线节奏",
+            "未触发排除项：商业波普封面或高彩韩漫。"
+          ],
+          "sources": [
+            "S21",
+            "S48"
+          ]
+        },
+        {
+          "id": "fine-line-portrait",
+          "label": "细线肖像",
+          "use_when": "人物心理、传记、访谈、年龄和身份刻画。",
+          "avoid_when": "大动作战斗或远景群像为主的页。",
+          "visual_traits": [
+            "五官结构准确",
+            "头发和皱纹线有方向",
+            "背景降密度"
+          ],
+          "prompt_additions": [
+            "Use the fine-line-portrait substyle: fine-line portrait comic with accurate facial structure, controlled hair and wrinkle lines, and calm focus.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：五官结构准确",
+            "未触发排除项：大动作战斗或远景群像为主的页。"
+          ],
+          "sources": [
+            "S21",
+            "S48"
+          ]
+        },
+        {
+          "id": "travel-journal",
+          "label": "旅行速写完成稿",
+          "use_when": "地点观察、历史空间、文化散步和手账式纪实。",
+          "avoid_when": "需要高冲击半调或幻想魔法特效。",
+          "visual_traits": [
+            "建筑透视清楚",
+            "现场感线条",
+            "局部淡洗"
+          ],
+          "prompt_additions": [
+            "Use the travel-journal substyle: finished travel-journal ink with accurate places, observational linework, and optional light wash.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：建筑透视清楚",
+            "未触发排除项：需要高冲击半调或幻想魔法特效。"
+          ],
+          "sources": [
+            "S21",
+            "S16"
+          ]
+        },
+        {
+          "id": "stipple-texture",
+          "label": "点描质感",
+          "use_when": "安静物件、植物、材质和需要细腻灰度的画面。",
+          "avoid_when": "高速动作或需要大块清晰色彩的段落。",
+          "visual_traits": [
+            "点密度塑造明暗",
+            "焦点细腻",
+            "非焦点简化"
+          ],
+          "prompt_additions": [
+            "Use the stipple-texture substyle: stipple-based ink texture with density-controlled values and simplified non-focal areas.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：点密度塑造明暗",
+            "未触发排除项：高速动作或需要大块清晰色彩的段落。"
+          ],
+          "sources": [
+            "S21",
+            "S49"
+          ]
+        },
+        {
+          "id": "woodcut-expression",
+          "label": "木刻式表现",
+          "use_when": "寓言、历史压迫、强烈社会议题和象征画面。",
+          "avoid_when": "柔和恋爱、精修偶像或透明水彩游记。",
+          "visual_traits": [
+            "粗硬黑白形",
+            "刀刻感边缘",
+            "构图压迫"
+          ],
+          "prompt_additions": [
+            "Use the woodcut-expression substyle: woodcut-like ink expression with hard black-white shapes, carved edges, and strong symbolic staging.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：粗硬黑白形",
+            "未触发排除项：柔和恋爱、精修偶像或透明水彩游记。"
+          ],
+          "sources": [
+            "S16",
+            "S21"
+          ]
+        },
+        {
+          "id": "ink-wash-muted",
+          "label": "淡墨洗染",
+          "use_when": "回忆、雨、雾、梦境、安静文学和低饱和氛围。",
+          "avoid_when": "强烈波普印刷、清线平涂或移动韩漫精修。",
+          "visual_traits": [
+            "有限灰阶洗染",
+            "线稿仍清楚",
+            "空白承担空气"
+          ],
+          "prompt_additions": [
+            "Use the ink-wash-muted substyle: muted ink wash over clear linework, limited gray values, and atmospheric paper whites.",
+            "Keep the parent nine-style boundary; do not import unrelated genre cliches."
+          ],
+          "qa_focus": [
+            "细分风格特征可见：有限灰阶洗染",
+            "未触发排除项：强烈波普印刷、清线平涂或移动韩漫精修。"
+          ],
+          "sources": [
+            "S21",
+            "S49"
+          ]
+        }
+      ],
+      "balloon_style": {
+        "fill_strategy": "adaptive",
+        "cloud_lobe_scale": 0.28,
+        "burst_spikes": 14,
+        "burst_amplitude": 0.12,
+        "outline_scale": 1.05,
+        "speech_jitter": 0.025
+      }
+    }
+  }
+}

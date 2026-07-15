@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Book To Comic Source Manifest",
+  "type": "object",
+  "required": ["schema_version", "book_title", "sources"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "book_title": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "title", "source_type", "reliability"],
+        "additionalProperties": true,
+        "properties": {
+          "source_id": { "type": "string" },
+          "title": { "type": "string" },
+          "url": { "type": "string" },
+          "publisher": { "type": "string" },
+          "accessed_at": { "type": "string" },
+          "source_type": { "type": "string" },
+          "reliability": { "type": "string" },
+          "supports": { "type": "array", "items": { "type": "string" } },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
