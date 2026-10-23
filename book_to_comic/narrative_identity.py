@@ -20,6 +20,15 @@ PENDING_STATUS = "needs_host_planning"
 READY_STATUS = "ready"
 NARRATIVE_IDENTITY_RELATIVE_PATH = Path("planning") / "narrative_identity.json"
 
+# Languages the pipeline knows how to prompt, QA, and package end-to-end
+# (caption prompts, text budgets, output filenames, EPUB metadata). zh-CN is
+# the original/default target; "en" was added so the project is usable for
+# English-language comics without forking the language out by hand.
+# Contributing a new language means wiring it through text_prompt_compiler.py,
+# project_prompts.py, and delivery.py, then adding its code here.
+DEFAULT_LANGUAGE = "zh-CN"
+SUPPORTED_LANGUAGES = ("zh-CN", "en")
+
 # Voice profile picks the caption REGISTER by book type. There is no single
 # right register: the storyteller opening that carries 卖炭翁 sounds absurd on
 # 《被讨厌的勇气》, whose best captions open on a pain-point line of dialogue.
@@ -31,12 +40,16 @@ class NarrativeIdentityError(ValueError):
     """Raised when a project narrative identity is missing or not production-ready."""
 
 
-def empty_narrative_identity(book_title: str = "") -> dict[str, Any]:
+def empty_narrative_identity(book_title: str = "", language: str = DEFAULT_LANGUAGE) -> dict[str, Any]:
+    if language not in SUPPORTED_LANGUAGES:
+        raise NarrativeIdentityError(
+            f"language must be one of {', '.join(SUPPORTED_LANGUAGES)}, got {language!r}"
+        )
     return {
         "schema_version": SCHEMA_VERSION,
         "planning_status": PENDING_STATUS,
         "book_title": book_title,
-        "language": "zh-CN",
+        "language": language,
         "voice_core": {
             "narrative_voice": "",
             "why_specific_to_this_book": "",
@@ -100,8 +113,8 @@ def validate_narrative_identity(
         elif status != READY_STATUS:
             errors.append("narrative_identity.planning_status must be ready")
 
-        if str(identity.get("language", "")).strip() != "zh-CN":
-            errors.append("narrative_identity.language must be zh-CN")
+        if str(identity.get("language", "")).strip() not in SUPPORTED_LANGUAGES:
+            errors.append(f"narrative_identity.language must be one of {', '.join(SUPPORTED_LANGUAGES)}")
 
         voice_core = identity.get("voice_core")
         if not isinstance(voice_core, Mapping) or not voice_core:

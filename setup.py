@@ -32,8 +32,8 @@ setup(
     name="book-to-comic",
     version="5.13.6",
     description=(
-        "Host-native Agent Skill that turns a book into a Chinese serialized comic "
-        "(research, adaptation, paneling, lettering, delivery) with no model API key required."
+        "Host-native Agent Skill that turns a book into a serialized comic "
+        "(research, adaptation, paneling, lettering, delivery) in zh-CN or en with no model API key required."
     ),
     long_description=_long_description(),
     long_description_content_type="text/markdown",

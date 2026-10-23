@@ -5,8 +5,59 @@ import json
 from typing import Any
 
 from .caption_budget import LONG_FORM_TARGET_MAX, LONG_FORM_TARGET_MIN
+from .narrative_identity import DEFAULT_LANGUAGE
 from .prompt_compiler import narrative_identity_lock_lines
 from .text_qa import DEFAULT_CARD_MAX_CHARS, DEFAULT_LONG_MAX_CHARS, DEFAULT_THRESHOLDS, PER_PANEL_MIN_CHARS
+
+
+def _prompt_language(narrative_identity: Mapping[str, Any] | None) -> str:
+    if not isinstance(narrative_identity, Mapping):
+        return DEFAULT_LANGUAGE
+    language = str(narrative_identity.get("language") or "").strip()
+    return language or DEFAULT_LANGUAGE
+
+
+def _panel_text_task_lines(panel_id: str, language: str) -> list[str]:
+    if language == "en":
+        return [
+            f"Task: write English post-production lettering for comic panel {panel_id}.",
+            "Language: en.",
+        ]
+    return [
+        f"Task: write Chinese post-production lettering for comic panel {panel_id}.",
+        "Language: zh-CN.",
+    ]
+
+
+def _panel_text_budget_lines(language: str) -> list[str]:
+    if language == "en":
+        return [
+            (
+                f"- long_form: target {LONG_FORM_TARGET_MIN}-{LONG_FORM_TARGET_MAX} characters per panel, "
+                "written like a storyteller addressing listeners, not expository prose or an essay's "
+                f"conclusion; hard floor {PER_PANEL_MIN_CHARS} per panel, hard ceiling {DEFAULT_LONG_MAX_CHARS}, "
+                f"episode average must not fall below {DEFAULT_THRESHOLDS['avg_long_min_chars']}; "
+                "used for long image/review/production narrative."
+            ),
+            f"- card_form: mobile card copy; max 3 paragraphs; per-panel ceiling {DEFAULT_CARD_MAX_CHARS} characters; short character dialogue / plain-language explanation / real-life mapping.",
+            "- Do not repeat the same phrase across panels; the second layer must add new information; avoid translation-ese; keep poetic original lines verbatim instead of breaking them into a list.",
+            "- **The punchline must be felt**: give imagery, physical sensation, or a concrete consequence "
+            "(e.g. \"ten fingers, stained black for good\" / \"a fixed persona like armor\"), not a floating "
+            "conceptual claim. Every panel's copy must touch a real person, action, or prop that actually "
+            "exists in this panel's artwork.",
+        ]
+    return [
+        (
+            f"- long_form: 目标每格 {LONG_FORM_TARGET_MIN}-{LONG_FORM_TARGET_MAX} 个中文字符，"
+            f"像说书人讲给听众，不是说明文，也不是论文结论；单格硬下限 {PER_PANEL_MIN_CHARS}、"
+            f"硬上限 {DEFAULT_LONG_MAX_CHARS}，整集平均不得低于 {DEFAULT_THRESHOLDS['avg_long_min_chars']}；"
+            "used for long image/review/production narrative."
+        ),
+        f"- card_form: mobile card copy; max 3 paragraphs; 单格上限 {DEFAULT_CARD_MAX_CHARS} 字; short角色台词 / 大白话解释 / 现实映射.",
+        "- 禁止跨格复读同一短语；第二层必须给新信息；不写翻译腔；诗意原句保留原文不要拆成清单.",
+        "- **点睛句必须可感**：给意象、身体感或具体后果（「十根手指，黑得再也洗不回来」「固定人设像盔甲」），"
+        "不要给悬空的概念论断（「寻找便开始替代最初的惊异」）。每格文案必须至少碰到本格画面里真实存在的人、动作或道具。",
+    ]
 
 
 def compile_panel_text_prompt(
@@ -19,23 +70,14 @@ def compile_panel_text_prompt(
     next_panel: Mapping[str, Any] | None = None,
 ) -> str:
     panel_id = str(panel.get("panel_id") or f"P{int(panel.get('index') or 0):02d}")
+    language = _prompt_language(narrative_identity)
     lines = [
-        f"Task: write Chinese post-production lettering for comic panel {panel_id}.",
-        "Language: zh-CN.",
+        *_panel_text_task_lines(panel_id, language),
         *narrative_identity_lock_lines(narrative_identity),
         "Write text for two separate outputs:",
         # Budget comes from caption_budget.py (calibrated on 85 hand-reviewed
         # panels). The prompt and the QA gate must never disagree again.
-        (
-            f"- long_form: 目标每格 {LONG_FORM_TARGET_MIN}-{LONG_FORM_TARGET_MAX} 个中文字符，"
-            f"像说书人讲给听众，不是说明文，也不是论文结论；单格硬下限 {PER_PANEL_MIN_CHARS}、"
-            f"硬上限 {DEFAULT_LONG_MAX_CHARS}，整集平均不得低于 {DEFAULT_THRESHOLDS['avg_long_min_chars']}；"
-            "used for long image/review/production narrative."
-        ),
-        f"- card_form: mobile card copy; max 3 paragraphs; 单格上限 {DEFAULT_CARD_MAX_CHARS} 字; short角色台词 / 大白话解释 / 现实映射.",
-        "- 禁止跨格复读同一短语；第二层必须给新信息；不写翻译腔；诗意原句保留原文不要拆成清单.",
-        "- **点睛句必须可感**：给意象、身体感或具体后果（「十根手指，黑得再也洗不回来」「固定人设像盔甲」），"
-        "不要给悬空的概念论断（「寻找便开始替代最初的惊异」）。每格文案必须至少碰到本格画面里真实存在的人、动作或道具。",
+        *_panel_text_budget_lines(language),
         "Do not reuse generic cross-book phrases. Do not cheapen classics with clickbait, shock copy, or chicken-soup slogans.",
         "Use concrete scene, psychology, cause-effect bridge, plain-language translation, and a defensible reader-life bridge.",
         "Source refs:",
@@ -68,8 +110,9 @@ def compile_scene_text_prompt(
     narrative_identity: Mapping[str, Any] | None = None,
     episode: Mapping[str, Any] | None = None,
 ) -> str:
+    language = _prompt_language(narrative_identity)
     lines = [
-        f"Task: run a scene-level zh-CN text pass for comic scene {scene.get('scene_id', '')}.",
+        f"Task: run a scene-level {language} text pass for comic scene {scene.get('scene_id', '')}.",
         *narrative_identity_lock_lines(narrative_identity),
         "For each panel, produce text_layers and text_variants. Keep card_form <= 3 paragraphs; let long_form carry richer context.",
         "Check scene continuity: every panel should connect to previous action, not read like isolated article cards.",

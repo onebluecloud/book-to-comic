@@ -18,6 +18,7 @@ def export_cards_delivery(
     output_path: str | Path,
     delivery_format: str,
     title: str = "comic",
+    language: str = "zh-CN",
 ) -> Path:
     cards = _ordered_card_paths(Path(cards_dir))
     output = Path(output_path)
@@ -28,7 +29,7 @@ def export_cards_delivery(
     elif delivery_format == "cbz":
         _write_cbz(cards, output)
     elif delivery_format == "epub":
-        _write_epub(cards, output, title=title)
+        _write_epub(cards, output, title=title, language=language)
     elif delivery_format == "zip-production":
         # This low-level export never runs the gates. It must not be able to
         # mint an archive that looks like a gated production bundle (release
@@ -86,9 +87,10 @@ def _write_cbz(cards: list[Path], output: Path) -> None:
             archive.write(path, path.name)
 
 
-def _write_epub(cards: list[Path], output: Path, title: str) -> None:
+def _write_epub(cards: list[Path], output: Path, title: str, language: str = "zh-CN") -> None:
     image_sizes = _image_sizes(cards)
     safe_title = escape(title)
+    safe_language = escape(language or "zh-CN")
     book_id = f"urn:uuid:{uuid.uuid5(uuid.NAMESPACE_URL, title + ':' + ','.join(path.name for path in cards))}"
 
     with zipfile.ZipFile(output, "w") as archive:
@@ -104,14 +106,14 @@ def _write_epub(cards: list[Path], output: Path, title: str) -> None:
 """,
             compress_type=zipfile.ZIP_DEFLATED,
         )
-        archive.writestr("OEBPS/content.opf", _epub_content_opf(cards, image_sizes, safe_title, book_id))
-        archive.writestr("OEBPS/nav.xhtml", _epub_nav(cards, safe_title))
+        archive.writestr("OEBPS/content.opf", _epub_content_opf(cards, image_sizes, safe_title, book_id, safe_language))
+        archive.writestr("OEBPS/nav.xhtml", _epub_nav(cards, safe_title, safe_language))
         archive.writestr("OEBPS/styles.css", _epub_css())
         for index, (path, (width, height)) in enumerate(zip(cards, image_sizes), start=1):
             archive.write(path, f"OEBPS/images/{path.name}", compress_type=zipfile.ZIP_DEFLATED)
             archive.writestr(
                 f"OEBPS/pages/page-{index:03d}.xhtml",
-                _epub_page(index, path.name, width, height, safe_title),
+                _epub_page(index, path.name, width, height, safe_title, safe_language),
                 compress_type=zipfile.ZIP_DEFLATED,
             )
 
@@ -124,7 +126,7 @@ def _image_sizes(cards: list[Path]) -> list[tuple[int, int]]:
     return sizes
 
 
-def _epub_content_opf(cards: list[Path], image_sizes: list[tuple[int, int]], safe_title: str, book_id: str) -> str:
+def _epub_content_opf(cards: list[Path], image_sizes: list[tuple[int, int]], safe_title: str, book_id: str, safe_language: str = "zh-CN") -> str:
     image_items = "\n".join(
         f'    <item id="img{index:03d}" href="images/{escape(path.name)}" media-type="image/png"/>'
         for index, path in enumerate(cards, start=1)
@@ -140,7 +142,7 @@ def _epub_content_opf(cards: list[Path], image_sizes: list[tuple[int, int]], saf
   <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:identifier id="bookid">{escape(book_id)}</dc:identifier>
     <dc:title>{safe_title}</dc:title>
-    <dc:language>zh-CN</dc:language>
+    <dc:language>{safe_language}</dc:language>
     <meta property="rendition:layout">pre-paginated</meta>
     <meta property="rendition:orientation">portrait</meta>
     <meta property="rendition:spread">none</meta>
@@ -161,14 +163,14 @@ def _epub_content_opf(cards: list[Path], image_sizes: list[tuple[int, int]], saf
 """
 
 
-def _epub_nav(cards: list[Path], safe_title: str) -> str:
+def _epub_nav(cards: list[Path], safe_title: str, safe_language: str = "zh-CN") -> str:
     items = "\n".join(
         f'      <li><a href="pages/page-{index:03d}.xhtml">Page {index}</a></li>'
         for index in range(1, len(cards) + 1)
     )
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="zh-CN" xml:lang="zh-CN">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="{safe_language}" xml:lang="{safe_language}">
   <head>
     <title>{safe_title}</title>
   </head>
@@ -184,10 +186,10 @@ def _epub_nav(cards: list[Path], safe_title: str) -> str:
 """
 
 
-def _epub_page(index: int, image_name: str, width: int, height: int, safe_title: str) -> str:
+def _epub_page(index: int, image_name: str, width: int, height: int, safe_title: str, safe_language: str = "zh-CN") -> str:
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{safe_language}" xml:lang="{safe_language}">
   <head>
     <title>{safe_title} - Page {index}</title>
     <meta name="viewport" content="width={width}, height={height}"/>

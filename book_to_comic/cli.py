@@ -53,7 +53,7 @@ from .migrations import MigrationError, migrate_project
 from .page_qa import PagePlanError, validate_page_plan
 from .pipeline import check_project, run_pipeline
 from .prompt_compiler import compile_panel_prompt
-from .narrative_identity import NarrativeIdentityError, validate_narrative_identity
+from .narrative_identity import DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, NarrativeIdentityError, validate_narrative_identity
 from .project_layout import load_episode, migrate_legacy_project
 from .project_prompts import export_project_prompts, export_project_text_prompts
 from .project_workflow import (
@@ -95,6 +95,7 @@ def main(argv: list[str] | None = None) -> int:
                 args.project_dir,
                 delivery_intent=args.delivery_intent,
                 episode_id=args.episode_id,
+                language=args.language,
                 force=args.force,
             )
         except (OSError, ValueError) as exc:
@@ -645,7 +646,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "extract":
         try:
-            path = extract_book_to_project(args.input, args.output, force=args.force)
+            path = extract_book_to_project(args.input, args.output, language=args.language, force=args.force)
         except (FileNotFoundError, OSError, ValueError) as exc:
             print(f"Error: {exc}", file=sys.stderr)
             return 1
@@ -1221,6 +1222,12 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     init.add_argument("--episode-id", default="EP01", help="Episode id this project holds (one project = one episode).")
     init.add_argument(
+        "--language",
+        default=DEFAULT_LANGUAGE,
+        choices=SUPPORTED_LANGUAGES,
+        help="Panel lettering/caption language for this project. Defaults to zh-CN.",
+    )
+    init.add_argument(
         "--force",
         action="store_true",
         help="Overwrite an existing project (files are backed up to backup/init-<timestamp>/ first). Default: refuse.",
@@ -1453,7 +1460,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
     validate_narrative_identity_parser = subparsers.add_parser(
         "validate-narrative-identity",
-        help="Validate book-specific zh-CN narrative voice, lettering policy, and forbidden reusable copy.",
+        help="Validate book-specific narrative voice, lettering policy, and forbidden reusable copy for the project's configured language.",
     )
     validate_narrative_identity_parser.add_argument("--project", required=True, help="Artifact project directory.")
 
@@ -1530,6 +1537,12 @@ def _build_parser() -> argparse.ArgumentParser:
     extract.add_argument("input", help="Input PDF, TXT, Markdown, or DOCX file (EPUB not supported — convert first).")
     extract.add_argument("--output", required=True, help="Output project directory.")
     extract.add_argument(
+        "--language",
+        default=DEFAULT_LANGUAGE,
+        choices=SUPPORTED_LANGUAGES,
+        help="Panel lettering/caption language for this project. Defaults to zh-CN.",
+    )
+    extract.add_argument(
         "--force",
         action="store_true",
         help="Overwrite an existing project (files are backed up to backup/extract-<timestamp>/ first). Default: refuse.",
@@ -1570,11 +1583,11 @@ def _build_parser() -> argparse.ArgumentParser:
 
     project_text_prompts = subparsers.add_parser(
         "export-project-text-prompts",
-        help="Export zh-CN panel lettering prompts with narrative identity locks.",
+        help="Export panel lettering prompts (in the project's configured language) with narrative identity locks.",
     )
     project_text_prompts.add_argument("--project", required=True, help="Project directory containing story/episode-001.json.")
     project_text_prompts.add_argument("--episode", default=None, help="Episode id to VERIFY against the project's declared episode (mismatch errors; one project = one episode).")
-    project_text_prompts.add_argument("--output-dir", help="Directory for panel-01.zh-CN.md through panel-NN.zh-CN.md. Defaults to project/text-prompts.")
+    project_text_prompts.add_argument("--output-dir", help="Directory for panel-01.<language>.md through panel-NN.<language>.md. Defaults to project/text-prompts.")
 
     validate_text_richness_parser = subparsers.add_parser(
         "validate-text-richness",

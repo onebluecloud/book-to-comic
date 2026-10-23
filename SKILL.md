@@ -96,7 +96,7 @@ outputs/<project-id>/
 
 严格按顺序执行；命令全清单见「正式命令契约」，各步规则细节见对应硬闸节，此处只给顺序与本步独有约束。
 
-1. 接收书名/图书文件，自动定 `language=zh-CN`, `target_platform=multi`, `image_mode=codex-native`, `output_directory=outputs/<slug>-<timestamp>`。
+1. 接收书名/图书文件，自动定 `language=zh-CN`（可用 `init-project --language en` 选择英文；见 `narrative_identity.py` 的 `SUPPORTED_LANGUAGES`）, `target_platform=multi`, `image_mode=codex-native`, `output_directory=outputs/<slug>-<timestamp>`。
 2. 上传图书则导入原文：连载（默认）走 `ingest-source --series <系列目录> <文件>`，EP01 的原文由 `add-episode` 自动交接；单话独立项目对已 init 的项目走 `ingest-source --project <项目> <文件>`，对全新空目录才用 `extract`（extract 会建整个项目骨架，拒绝在已有项目上运行）。仅书名则用宿主可用的联网检索/浏览器/命令行研究，输出 `source/` 资料清单。
 3. 先全书系列规划再单话，结构必须是 `整本书 -> 篇章 / 章节 / 情节段 -> episode -> scenes[] -> panels[]`：不能把整本书压成几格，也不能让 episode 直接挂一串观点卡 panel。**★改编第一步先列全书「高光 beat 清单」**——原文里必须给足银幕时间的瞬间（桃花源记 7 个：忽逢桃林／豁然开朗／见渔人乃大惊／不知有汉／不足为外人道／遂迷不复得路／无问津者）。**话数由 beat 账定**：每个高光 beat 至少独占 1 格、震撼型（空间或认知骤变，如「豁然开朗」）再 +1 铺垫格，加连接格 → 全书总格数 → 按每话 ≤14 格拆成 N 话写进 `series_bible`。**默认连载**（作品好看优先）；文言／诗歌 beat 密度高（几字一场面）自然多话，论述书 beat 稀自然少格——不按书型硬分类，密度自己说话。**禁止把多个高光 beat 均匀压进一话**（那会把高光摊成均匀灰：豁然开朗不震撼、乃大惊没反应）。
 4. **单话内部**格数按 `episode_format`：短钩子 4-6 格，标准移动端轮播 6-10 格，文学/小说重场景 10-14 格，硬上限 16 格。**全书拆几话由第 3 步的 beat 账决定，不是把全文塞进一话再看超不超 16。**
@@ -203,7 +203,7 @@ book-to-comic validate-page-plan --project <project>
 
 ## 文字身份与去套话硬闸
 
-- 每个项目必须写 `planning/narrative_identity.json`：`voice_core`, `speaker_registers`, `forbidden_generic_phrases`, `forbidden_cross_book_phrases`, `panel_text_policy`。`planning_status=needs_host_planning`、非 `zh-CN`、空 speaker registers、空 forbidden phrases、`why_specific_to_this_book` 太短或 `panel_text_policy.max_card_paragraphs != 3` 必须失败。
+- 每个项目必须写 `planning/narrative_identity.json`：`voice_core`, `speaker_registers`, `forbidden_generic_phrases`, `forbidden_cross_book_phrases`, `panel_text_policy`。`planning_status=needs_host_planning`、`language` 不在 `SUPPORTED_LANGUAGES`（当前 `zh-CN`/`en`，与项目初始化时选定的语言一致）、空 speaker registers、空 forbidden phrases、`why_specific_to_this_book` 太短或 `panel_text_policy.max_card_paragraphs != 3` 必须失败。
 - `narrative_identity` 是本书文案声线合同，不是标题风格词；说明为何要这种口吻、哪些角色怎么说话、哪些泛用句和上一本不能再出现。风格复用不等于文本复用。
 - 叠字分两套：`long_form` 用于长图、review 和生产叙事，可写足场景/心理/因果桥/概念翻译；`card_form` 仅作兼容/闸校验的内部短版（卡片交付已改用 `long_form`），最多三段、短、能扫读。旧规则“每格最多三句”只适用于 `card_form`，不得拿它限制长图。
 - 每格文案至少有 `scene_setting`, `connective_prose`, `reality_mapping`；适合内心转折的格必须有 `interior_monologue`。可在 `text_layers` 或规范化到 Panel 字段。

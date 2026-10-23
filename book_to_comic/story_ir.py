@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 from typing import Any
 
+from .narrative_identity import DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES
 from .project_layout import load_episode, save_episode
 from .story_gate import ALLOWED_PANEL_ROLES, flatten_episode_panels
 from .text_bible import panel_card_form_lines, panel_long_form_lines, panel_text_metrics
@@ -85,6 +86,7 @@ def split_source_text(text: str, *, chapter_id: str = "CH1", max_chars: int = DE
 
 def build_story_ir(project: str | Path) -> dict[str, Any]:
     root = Path(project)
+    language = _project_language(root)
     chunks_payload = _read_json(root / "source" / "source_chunks.json")
     episode_path = root / "story" / "episode-001.json"
     episode = load_episode(root)
@@ -148,7 +150,7 @@ def build_story_ir(project: str | Path) -> dict[str, Any]:
             panel["panel_role"] = role
             panel["action_verb"] = action_verb
             panel["reading_order"] = reading_order
-            _default_text_scaffold(panel, scene, role)
+            _default_text_scaffold(panel, scene, role, language=language)
             panel["text_budgets"] = _text_budgets(panel)
             panel["text_metrics"] = panel_text_metrics(panel)
             panel["balloon_budget"] = panel["text_budgets"]["card_form"]
@@ -318,7 +320,16 @@ def _story_ir_source_ids(episode: dict[str, Any]) -> set[str]:
     return {_nonempty(chunk.get("chunk_id")) for chunk in chunks if isinstance(chunk, dict) and _nonempty(chunk.get("chunk_id"))}
 
 
-def _default_text_scaffold(panel: dict[str, Any], scene: dict[str, Any], role: str) -> None:
+def _project_language(root: Path) -> str:
+    try:
+        data = _read_json(root / "project.json")
+    except (OSError, json.JSONDecodeError):
+        return DEFAULT_LANGUAGE
+    language = str(data.get("language") or "").strip()
+    return language if language in SUPPORTED_LANGUAGES else DEFAULT_LANGUAGE
+
+
+def _default_text_scaffold(panel: dict[str, Any], scene: dict[str, Any], role: str, *, language: str = DEFAULT_LANGUAGE) -> None:
     layers = panel.get("text_layers")
     if not isinstance(layers, dict):
         layers = {}
@@ -343,7 +354,8 @@ def _default_text_scaffold(panel: dict[str, Any], scene: dict[str, Any], role: s
     if not _nonempty(panel.get("interior_monologue")) and not _string_list(layers.get("interior_monologue")) and role in {"reaction", "turn", "payoff"}:
         emotion = _nonempty(panel.get("emotion"))
         if emotion:
-            layers["interior_monologue"] = f"他/她的反应：{emotion}"
+            template = "Their reaction: {emotion}" if language == "en" else "他/她的反应：{emotion}"
+            layers["interior_monologue"] = template.format(emotion=emotion)
             panel["interior_monologue"] = layers["interior_monologue"]
     panel["text_layers"] = layers
 
@@ -356,13 +368,22 @@ def _default_text_scaffold(panel: dict[str, Any], scene: dict[str, Any], role: s
         "card_form": card_form[:3],
     }
     panel["copy_jobs"] = _copy_jobs(panel, role)
-    panel["text_requirements"] = {
-        "language": "zh-CN",
-        "long_form": "用于长图、review 和生产叙事；允许写足场景、心理、因果和概念翻译。",
-        "card_form": "用于手机单格卡片；最多三段：角色台词 / 大白话解释 / 现实映射。",
-        "inner_monologue_applicable": role in {"reaction", "turn", "payoff"},
-        "max_card_paragraphs": 3,
-    }
+    if language == "en":
+        panel["text_requirements"] = {
+            "language": language,
+            "long_form": "Used for long image/review/production narrative; allowed to fully write out scene, psychology, cause-effect, and concept translation.",
+            "card_form": "Used for mobile single-panel cards; max 3 paragraphs: character dialogue / plain-language explanation / real-life mapping.",
+            "inner_monologue_applicable": role in {"reaction", "turn", "payoff"},
+            "max_card_paragraphs": 3,
+        }
+    else:
+        panel["text_requirements"] = {
+            "language": language,
+            "long_form": "用于长图、review 和生产叙事；允许写足场景、心理、因果和概念翻译。",
+            "card_form": "用于手机单格卡片；最多三段：角色台词 / 大白话解释 / 现实映射。",
+            "inner_monologue_applicable": role in {"reaction", "turn", "payoff"},
+            "max_card_paragraphs": 3,
+        }
 
 
 def _copy_jobs(panel: dict[str, Any], role: str) -> list[str]:
