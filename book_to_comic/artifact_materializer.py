@@ -47,7 +47,7 @@ from .delivery import export_cards_delivery
 from .fit import validate_fit
 from .grounding_qa import evaluate_export_rights, validate_grounding
 from .models import AdaptationPackage, Character, CoreIdea, Panel, Suitability
-from .narrative_identity import empty_narrative_identity, validate_narrative_identity
+from .narrative_identity import DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, empty_narrative_identity, validate_narrative_identity
 from .page_plan import load_page_plan, page_slots, panel_id
 from .page_qa import validate_page_plan
 from .project_layout import load_episode, new_episode_skeleton, save_episode, validate_episode_id
@@ -86,12 +86,15 @@ def init_project(
     *,
     delivery_intent: str = "hardcore_showcase",
     episode_id: str = "EP01",
+    language: str = DEFAULT_LANGUAGE,
     force: bool = False,
 ) -> Path:
     root = Path(project_dir)
     episode_id = validate_episode_id(episode_id)
     if delivery_intent not in {"mass_traffic", "hardcore_showcase"}:
         raise ValueError("delivery_intent must be mass_traffic or hardcore_showcase")
+    if language not in SUPPORTED_LANGUAGES:
+        raise ValueError(f"language must be one of {', '.join(SUPPORTED_LANGUAGES)}")
     # Re-running init on a live project used to silently reset manifest, state
     # and episode to empty with exit 0 (audit P1-1). Refuse by default. --force
     # moves the ENTIRE old project into backup/ first — the first fix backed up
@@ -155,6 +158,7 @@ def init_project(
             "panel_aspect_ratio": DEFAULT_PANEL_ASPECT_RATIO,
             "lettering_mode": "hybrid",
             "delivery_intent": delivery_intent,
+            "language": language,
             "created_at": now,
         },
     )
@@ -162,8 +166,23 @@ def init_project(
     _write_json(root / "state.json", {"schema_version": MANIFEST_VERSION, "status": "initialized", "updated_at": now})
     save_episode(root, new_episode_skeleton(book, episode_id=episode_id))
     _write_json(root / "planning" / "visual_identity.json", empty_visual_identity(book_title=book))
-    _write_json(root / "planning" / "narrative_identity.json", empty_narrative_identity(book_title=book))
+    _write_json(root / "planning" / "narrative_identity.json", empty_narrative_identity(book_title=book, language=language))
     return root
+
+
+def project_language(root: str | Path) -> str:
+    """Read the project's configured output language, defaulting to zh-CN for
+    projects created before --language existed."""
+    project_file = Path(root) / "project.json"
+    if project_file.exists():
+        try:
+            data = json.loads(project_file.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return DEFAULT_LANGUAGE
+        language = str(data.get("language") or "").strip()
+        if language in SUPPORTED_LANGUAGES:
+            return language
+    return DEFAULT_LANGUAGE
 
 
 def required_card_theme(root: Path) -> str:
@@ -702,9 +721,10 @@ def compose_artifact_project(
         comic_pages_dir = final / "comic-pages"
         comic_page_paths = _compose_comic_page_images(root, package, panel_dir, comic_pages_dir, balloon_plan=balloon_plan, lettering_mode=lettering_mode)
     cover_manifest = build_cover_assets(root)
+    project_lang = project_language(root)
     pdf = export_cards_delivery(cards_dir, final / "comic.pdf", "pdf", title=package.book_title)
     cbz = export_cards_delivery(cards_dir, final / "comic.cbz", "cbz", title=package.book_title)
-    epub = export_cards_delivery(cards_dir, final / "comic.epub", "epub", title=package.book_title)
+    epub = export_cards_delivery(cards_dir, final / "comic.epub", "epub", title=package.book_title, language=project_lang)
     # Rights decide the bundle tier. Passing gates makes the WORK finished;
     # only a clean rights declaration makes it SHAREABLE (audit P0-1):
     # public → production.zip; anything unlicensed/unconsented/forced →

@@ -14,7 +14,7 @@ from .composer import compose_carousel_card_images, compose_long_image, create_c
 from .delivery import export_cards_delivery
 from .delivery_gate import is_artifact_project
 from .models import AdaptationPackage, Character, CoreIdea, Panel, Suitability
-from .narrative_identity import empty_narrative_identity
+from .narrative_identity import DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, empty_narrative_identity
 from .project_layout import load_episode, new_episode_skeleton, save_episode
 from .text_bible import normalize_story_panel_for_package
 from .visual_identity import empty_visual_identity
@@ -24,10 +24,18 @@ from .vector_renderer import render_vector_episode
 DEFAULT_EPISODE_ID = "EP01"
 
 
-def extract_book_to_project(input_path: str | Path, output_dir: str | Path, *, force: bool = False) -> Path:
+def extract_book_to_project(
+    input_path: str | Path,
+    output_dir: str | Path,
+    *,
+    language: str = DEFAULT_LANGUAGE,
+    force: bool = False,
+) -> Path:
     source_file = Path(input_path)
     if not source_file.exists():
         raise FileNotFoundError(f"Input book file does not exist: {source_file}")
+    if language not in SUPPORTED_LANGUAGES:
+        raise ValueError(f"language must be one of {', '.join(SUPPORTED_LANGUAGES)}")
 
     project_dir = Path(output_dir)
     # Same protection as init-project (audit P1-1): extract used to silently
@@ -84,12 +92,12 @@ def extract_book_to_project(input_path: str | Path, output_dir: str | Path, *, f
     title = source_file.stem
     now = _now()
 
-    _write_json(project_dir / "project.json", _project_json(slug, title, now))
+    _write_json(project_dir / "project.json", _project_json(slug, title, now, language=language))
     _write_json(project_dir / "manifest.json", {"schema_version": "2.0", "project_id": slug, "assets": []})
     _write_json(project_dir / "state.json", {"schema_version": "2.0", "status": "initialized", "updated_at": now})
     (source_dir / "raw_text.txt").write_text(text, encoding="utf-8")
     _write_json(source_dir / "chapters.json", chapters)
-    _write_json(source_dir / "metadata.json", _metadata_json(source_file, title, now))
+    _write_json(source_dir / "metadata.json", _metadata_json(source_file, title, now, language=language))
     _write_json(source_dir / "extraction_report.json", _extraction_report_json(source_file, text, chapters))
     _write_json(source_dir / "source_manifest.json", _source_manifest_json(source_file, title, now))
 
@@ -98,7 +106,7 @@ def extract_book_to_project(input_path: str | Path, output_dir: str | Path, *, f
     environment_bible = _empty_environment_bible_json()
     style_bible = _empty_style_bible_json()
     visual_identity = empty_visual_identity(book_title=title)
-    narrative_identity = empty_narrative_identity(book_title=title)
+    narrative_identity = empty_narrative_identity(book_title=title, language=language)
     _write_json(planning_dir / "series_bible.json", series_bible)
     _write_json(planning_dir / "character_bible.json", character_bible)
     _write_json(planning_dir / "environment_bible.json", environment_bible)
@@ -276,7 +284,7 @@ def export_project(project_dir: str | Path, formats: str = "pdf,cbz,epub,long-im
     if "cbz" in requested:
         results["cbz"] = export_cards_delivery(cards_dir, deliverables / "comic.cbz", "cbz", title=_project_title(root))
     if "epub" in requested:
-        results["epub"] = export_cards_delivery(cards_dir, deliverables / "comic.epub", "epub", title=_project_title(root))
+        results["epub"] = export_cards_delivery(cards_dir, deliverables / "comic.epub", "epub", title=_project_title(root), language=_project_language(root))
     if "long-image" in requested and not (deliverables / "long-image.png").exists():
         compose_project(root)
     if "long-image" in requested:
@@ -538,12 +546,12 @@ def _chapters_from_text(text: str) -> list[dict[str, object]]:
     return chapters
 
 
-def _project_json(slug: str, title: str, now: str) -> dict[str, object]:
+def _project_json(slug: str, title: str, now: str, *, language: str = DEFAULT_LANGUAGE) -> dict[str, object]:
     return {
         "schema_version": "3.0",
         "project_id": slug,
         "project_title": title,
-        "language": "zh-CN",
+        "language": language,
         "target_platform": "multi",
         "delivery_intent": "hardcore_showcase",
         "image_backend": "auto",
@@ -553,12 +561,12 @@ def _project_json(slug: str, title: str, now: str) -> dict[str, object]:
     }
 
 
-def _metadata_json(source_file: Path, title: str, now: str) -> dict[str, object]:
+def _metadata_json(source_file: Path, title: str, now: str, *, language: str = DEFAULT_LANGUAGE) -> dict[str, object]:
     return {
         "schema_version": "1.0",
         "title": title,
         "author": "",
-        "language": "zh-CN",
+        "language": language,
         "source_filename": source_file.name,
         "extracted_at": now,
     }
@@ -705,6 +713,14 @@ def _project_title(root: Path) -> str:
         return _read_json(root / "project.json")["project_title"]
     except (OSError, KeyError, json.JSONDecodeError):
         return root.name
+
+
+def _project_language(root: Path) -> str:
+    try:
+        language = str(_read_json(root / "project.json").get("language") or "").strip()
+    except (OSError, json.JSONDecodeError):
+        return DEFAULT_LANGUAGE
+    return language if language in SUPPORTED_LANGUAGES else DEFAULT_LANGUAGE
 
 
 def _production_readme(root: Path) -> str:

@@ -7,6 +7,7 @@ from typing import Any
 
 from .delivery_config import DEFAULT_PANEL_ASPECT_RATIO, project_panel_aspect_ratio
 from .models import PanelArtSpec
+from .narrative_identity import DEFAULT_LANGUAGE
 from .project_layout import load_episode, resolve_episode_id
 from .prompt_compiler import compile_panel_prompt
 from .styles import get_style
@@ -98,6 +99,7 @@ def export_project_text_prompts(
     final_output_dir = Path(output_dir) if output_dir else root / "text-prompts"
     final_output_dir.mkdir(parents=True, exist_ok=True)
     narrative_identity = _load_optional_json(root / "planning" / "narrative_identity.json")
+    language = str(narrative_identity.get("language") or DEFAULT_LANGUAGE).strip() or DEFAULT_LANGUAGE
     scene_by_panel = _scene_by_panel(episode)
 
     prompts: list[dict[str, str]] = []
@@ -106,7 +108,7 @@ def export_project_text_prompts(
             raise ValueError("Episode panels must be JSON objects")
         panel_data = dict(panel)
         panel_id = str(panel_data.get("panel_id") or f"P{index:02d}")
-        prompt_path = final_output_dir / f"panel-{index:02d}.zh-CN.md"
+        prompt_path = final_output_dir / f"panel-{index:02d}.{language}.md"
         prompt_path.write_text(
             compile_panel_text_prompt(
                 panel_data,
@@ -124,7 +126,7 @@ def export_project_text_prompts(
         "schema_version": "1.0",
         "episode_id": episode_id,
         "panel_count": len(prompts),
-        "prompt_type": "zh-CN-lettering",
+        "prompt_type": f"{language}-lettering",
         "prompts": prompts,
     }
     manifest_path = final_output_dir / "manifest.json"
